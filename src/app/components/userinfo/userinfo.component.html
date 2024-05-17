@@ -1,0 +1,51 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card shadow">
+        <br>
+        <label for="profilePictureInput" class="profile-picture-wrapper">
+          <img [src]="profilePicture || defaultProfilePicture" class="profile-picture" alt="Profile Picture">
+          <input type="file" #fileInput id="profilePictureInput" style="display: none" (change)="onFileSelected($event)">
+        </label>
+        <div class="card-body text-center">
+          <h5 class="card-title">Abdellah Benabdennour</h5>
+          <p class="card-text">Web Developer</p>
+          <p class="card-text">Location: Rabat, Maroc</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-body">
+          <h5 class="card-title">Details</h5>
+          <p class="card-text">
+            <strong>Email:</strong> Benabdennourabdellah21@gmail.com<br>
+            <strong>Phone:</strong> +212669606184<br>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-4 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Projects</h5>
+          <p class="card-text">
+            <strong>Project 1:</strong> ...........<br>
+            <strong>Project 2:</strong> ...........<br>
+            <strong>Project 3:</strong> ...........<br>
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt-4 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Skills</h5>
+          <ul class="list-group rounded-list">
+            <li class="list-group-item rounded-pill">Skill 1</li>
+            <br>
+            <li class="list-group-item rounded-pill">Skill 2</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

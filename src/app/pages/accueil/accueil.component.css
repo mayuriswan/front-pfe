@@ -1,0 +1,12 @@
+app-navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar stays on top */
+}
+
+app-hero {
+    /* Add padding-top to create space for the navbar */
+    padding-top: 70px; /* Adjust according to your navbar height */
+}

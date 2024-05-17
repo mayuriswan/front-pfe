@@ -1,0 +1,17 @@
+<section class="hero-section">
+  <div class="slider-container" [style.transform]="'translateX(-' + currentSlide * 100 + '%)'">
+    <div class="slide" *ngFor="let slide of slides; let i = index" [style.backgroundImage]="'url(' + slide.image + ')'">
+      <div class="container">
+        <div class="text-container">
+          <div class="text-content">
+            <h1 class="hero-title">{{ slide.title }}</h1>
+            <p class="hero-description">{{ slide.description }}</p>
+          </div>
+          <div class="button-container">
+            <a class="contact-sales-button" href="#">En Savoir Plus</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

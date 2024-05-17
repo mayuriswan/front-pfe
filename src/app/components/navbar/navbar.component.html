@@ -1,0 +1,19 @@
+<header class="navbar">
+  <a class="logo" href="#"><img src="assets/Images/iresenlogo.png" alt="Iresen Inc Logo"></a>
+  <nav class="nav-menu">
+    <a class="nav-link" [routerLink]="['/']">Accueil</a>
+    <a class="nav-link" href="#">Docs</a>
+    <a class="nav-link" href="#">Contact</a>
+    <div class="dropdown">
+      <a class="nav-link" href="#">Appel à projet</a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Project 1</a>
+        <a class="dropdown-item" href="#">Project 2</a>
+        <a class="dropdown-item" href="#">Project 3</a>
+      </div>
+    </div>
+  </nav>
+  <div class="button-container">
+    <button *ngIf="isAccueilPage()" type="button" class="auth-button" (click)="navigateToLogin()">Se connecter</button>
+  </div>
+</header>

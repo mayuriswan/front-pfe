@@ -1,0 +1,36 @@
+<nav class="sidebar" [ngClass]="{'active': isOpen}">
+    <div class="sidebar-header">
+      <a class="logo" href="#">
+        <img src="assets/Images/iresenlogo.png" alt="Iresen Inc Logo">
+      </a>
+      <div class="user-info">
+        <i class="bi bi-person-circle"></i>
+        <div class="user-text">
+          <h2>Bienvenue</h2>
+          <h5>Abdellah Benabdennour</h5>
+          <hr class="sidebar-divider">
+        </div>
+      </div>
+    </div>
+  
+    <ul class="list-unstyled components">
+      <li (click)="navigateTo('/home')" style="cursor: pointer;">
+        <a (click)="toggleSidebar()">
+          <i class="bi bi-house-door"></i> Home
+        </a>
+      </li>
+      <li (click)="navigateTo('/profile')" style="cursor: pointer;">
+        <a (click)="toggleSidebar()">
+          <i class="bi bi-person"></i> Profile
+        </a>
+      </li>
+    </ul>
+  
+    <div class="sign-out">
+      <hr class="sidebar-divider">
+      <a href="#" (click)="signOut()" class="sign-out-link">
+        <i class="bi bi-box-arrow-right"></i> Déconnecter
+      </a>
+    </div>
+  </nav>
+  
