@@ -1,21 +1,24 @@
 <div class="login-container">
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form (ngSubmit)="onSubmitSignup()" #signupForm="ngForm">
                 <h1>Créer un compte</h1>
-                <input type="text" placeholder="Nom" class="rounded-input" />
-                <input type="email" placeholder="Email" class="rounded-input" />
-                <input type="password" placeholder="Mot de passe" class="rounded-input" />
-                <button>Créer un compte</button>
+                <input type="text" placeholder="Nom" class="rounded-input" [(ngModel)]="lastname" name="lastname" required />
+                <input type="text" placeholder="Prénom" class="rounded-input" [(ngModel)]="firstname" name="firstname" required />
+                <input type="text" placeholder="Phone" class="rounded-input" [(ngModel)]="phone" name="phone" required />
+                <input type="email" placeholder="Email" class="rounded-input" [(ngModel)]="email" name="email" required />
+                <input type="password" placeholder="Mot de passe" class="rounded-input" [(ngModel)]="password" name="password" required />
+                <button type="submit" [class.hidden]="!signupForm.valid" style="margin-bottom: 10px;">Créer un compte</button>
+
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form action="#">
+            <form (ngSubmit)="onSubmitSignin()">
                 <h1>Se connecter</h1>
-                <input type="email" placeholder="Email" class="rounded-input" />
-                <input type="password" placeholder="Password" class="rounded-input" />
+                <input type="email" placeholder="Email" class="rounded-input" [(ngModel)]="signinEmail" name="signinEmail" required />
+                <input type="password" placeholder="Password" class="rounded-input" [(ngModel)]="signinPassword" name="signinPassword" required />
                 <a href="#">Vous avez oublié votre mot de passe ?</a>
-                <button (click)="navigateToHome()">Se connecter</button>
+                <button type="submit">Se connecter</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -30,7 +33,16 @@
                     <p>Saisissez vos données personnelles et commencez à voyager avec nous</p>
                     <button class="ghost" id="signUp">Créer un compte</button>
                 </div>
+                <br>
             </div>
         </div>
     </div>
+    <br>
+    <div *ngIf="emailError" id="emailErrorAlert" class="alert alert-danger alert-bottom" role="alert">
+        <h4 class="alert-heading">There is an error</h4>
+        <p>This email already exists in our database</p>
+        <hr>
+        <p class="mb-0">Choose another email if you want to sign up</p>
+    </div>
+    
 </div>

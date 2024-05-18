@@ -286,3 +286,46 @@ button {
 h1, h2, input, button {
     border-radius: 20px; /* Apply border-radius to all elements */
 }
+.hidden {
+    visibility: hidden;
+}
+
+.alert-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 1000;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease-out; /* Transition for fade-out effect */
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#emailErrorAlert {
+  animation-name: fadeInAndOut;
+  animation-duration: 4s;
+}
+
+

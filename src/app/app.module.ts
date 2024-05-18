@@ -1,3 +1,5 @@
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -20,7 +22,7 @@ import { ProfilComponent } from './pages/profil/profil.component';
 import { FormsModule } from '@angular/forms';
 import { AapComponent } from './components/aap/aap.component';
 import { CircularProgressBarComponent } from './components/circular-progress-bar/circular-progress-bar.component';
-
+import { AapApiService } from './services/aap-api.service';
 
 @NgModule({
   declarations: [
@@ -46,9 +48,11 @@ import { CircularProgressBarComponent } from './components/circular-progress-bar
     BrowserModule,
     ImageCropperModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AapApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
