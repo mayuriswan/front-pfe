@@ -4,13 +4,16 @@ import { LoginComponent } from './pages/login/login.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfilComponent } from './pages/profil/profil.component';
-
+import { AuthGuard } from './auth.guard'; 
+import { UsersmanagerComponent } from './pages/usersmanager/usersmanager.component';
 const routes: Routes = [
-  { path: '', component: AccueilComponent },
   { path: 'accueil', component: AccueilComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfilComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UsersmanagerComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfilComponent },
-  { path: 'home', component: HomeComponent }
+  { path: '', redirectTo: '/accueil', pathMatch: 'full' },
+  { path: '**', redirectTo: '/accueil' }
 ];
 
 @NgModule({
@@ -18,3 +21,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

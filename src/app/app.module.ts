@@ -23,7 +23,13 @@ import { FormsModule } from '@angular/forms';
 import { AapComponent } from './components/aap/aap.component';
 import { CircularProgressBarComponent } from './components/circular-progress-bar/circular-progress-bar.component';
 import { AapApiService } from './services/aap-api.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { AuthService } from './services/auth.service';
+import { UsersmanagerComponent } from './pages/usersmanager/usersmanager.component';
+import { UsersComponent } from './components/users/users.component';
+import { ShowUserComponent } from './components/users/show-user/show-user.component';
+import { AddEditUsersComponent } from './components/users/add-edit-users/add-edit-users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +46,11 @@ import { AapApiService } from './services/aap-api.service';
     SidebarComponent,
     ProfilComponent,
     AapComponent,
-    CircularProgressBarComponent
+    CircularProgressBarComponent,
+    UsersmanagerComponent,
+    UsersComponent,
+    ShowUserComponent,
+    AddEditUsersComponent
     
   ],
   imports: [
@@ -52,7 +62,9 @@ import { AapApiService } from './services/aap-api.service';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AapApiService],
+  providers: [
+    AuthService,
+    AapApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
