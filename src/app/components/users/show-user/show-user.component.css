@@ -1,4 +1,43 @@
+html,
+body,
+.intro {
+  height: 100%;
+}
 
+table td,
+table th {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+thead th {
+  color: #fff;
+}
+
+.card {
+  border-radius: .5rem;
+}
+
+.table-scroll {
+  border-radius: .5rem;
+}
+
+.table-scroll table thead th {
+  font-size: 1.25rem;
+}
+
+thead {
+  top: 0;
+  position: sticky;
+}
+
+.table-header-gradient th {
+  background-color: rgba(0, 34, 134, 0.826);
+    color: #fff;
+}
+
+/* Existing CSS */
 #add-success-alert,
 #update-success-alert,
 #delete-success-alert {
@@ -13,13 +52,13 @@
 }
 
 @-webkit-keyframes fadeInAndOut {
-  0% {opacity: 0;}
-  50% {opacity: 1;}
-  100% {opacity: 0;}
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 @keyframes fadeInAndOut {
-  0% {opacity: 0;}
-  50% {opacity: 1;}
-  100% {opacity: 0;}
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
 }
