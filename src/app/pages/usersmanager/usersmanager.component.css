@@ -1,0 +1,14 @@
+.sidebar-container {
+    display: flex;
+    height: 100vh; /* Set height to 100% of viewport height */
+    overflow: hidden; /* Prevent content from overflowing */
+  }
+  
+  app-sidebar {
+    flex: 0 0 250px; /* Set fixed width for app-sidebar */
+  }
+  
+  app-users {
+    flex: 1; /* Allow app-userinfo to expand and fill remaining space */
+  }
+  

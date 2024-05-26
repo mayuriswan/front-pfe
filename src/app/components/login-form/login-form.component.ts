@@ -1,6 +1,7 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AapApiService } from 'src/app/services/aap-api.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +19,12 @@ export class LoginFormComponent implements AfterViewInit {
   emailError: boolean = false;
   emailErrorFade: boolean = false;
 
-  constructor(private elementRef: ElementRef, private router: Router, private apiService: AapApiService) {}
+  constructor(
+    private elementRef: ElementRef,
+    private router: Router,
+    private apiService: AapApiService,
+    private authService: AuthService
+  ) {}
 
   ngAfterViewInit() {
     const signUpButton = this.elementRef.nativeElement.querySelector('#signUp');
@@ -41,7 +47,7 @@ export class LoginFormComponent implements AfterViewInit {
       phone: this.phone,
       email: this.email,
       password: this.password,
-      role: 0 // Set role to 0
+      role: 0
     };
 
     this.apiService.addUser(newUser).subscribe(
@@ -51,13 +57,13 @@ export class LoginFormComponent implements AfterViewInit {
       },
       error => {
         if (error === 'Email already exists') {
-          this.emailError = true; // Set error flag
-          this.emailErrorFade = false; // Reset fade class
+          this.emailError = true;
+          this.emailErrorFade = false;
           setTimeout(() => {
-            this.emailErrorFade = true; // Add fade class
+            this.emailErrorFade = true;
           }, 0);
           setTimeout(() => {
-            this.emailError = false; // Hide error after 3 seconds
+            this.emailError = false;
           }, 3000);
         } else {
           console.error('Error creating user', error);
@@ -67,6 +73,6 @@ export class LoginFormComponent implements AfterViewInit {
   }
 
   onSubmitSignin() {
-    // Sign-in logic here
+    this.authService.login(this.signinEmail, this.signinPassword);
   }
 }

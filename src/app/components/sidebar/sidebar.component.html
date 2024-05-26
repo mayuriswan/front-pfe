@@ -24,7 +24,14 @@
           <i class="bi bi-person"></i> Profile
         </a>
       </li>
+      <li (click)="navigateTo('/users')" style="cursor: pointer;">
+        <a (click)="toggleSidebar()">
+          <i class="bi bi-person"></i> Users manager
+        </a>
+      </li>
     </ul>
+
+
   
     <div class="sign-out">
       <hr class="sidebar-divider">

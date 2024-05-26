@@ -23,7 +23,21 @@ import { FormsModule } from '@angular/forms';
 import { AapComponent } from './components/aap/aap.component';
 import { CircularProgressBarComponent } from './components/circular-progress-bar/circular-progress-bar.component';
 import { AapApiService } from './services/aap-api.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+<<<<<<< HEAD
+import { TableComponent } from './components/table/table.component';
+import { PostulerComponent } from './pages/postuler/postuler.component';
+import { ProjectComponent } from './components/project/project.component';
+
+
+=======
+import { AuthService } from './services/auth.service';
+import { UsersmanagerComponent } from './pages/usersmanager/usersmanager.component';
+import { UsersComponent } from './components/users/users.component';
+import { ShowUserComponent } from './components/users/show-user/show-user.component';
+import { AddEditUsersComponent } from './components/users/add-edit-users/add-edit-users.component';
+>>>>>>> a10a9546aca06f078aaa63ae68a6ffd6cf024aa9
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +54,17 @@ import { AapApiService } from './services/aap-api.service';
     SidebarComponent,
     ProfilComponent,
     AapComponent,
-    CircularProgressBarComponent
+    CircularProgressBarComponent,
+<<<<<<< HEAD
+    TableComponent,
+    PostulerComponent,
+    ProjectComponent
+=======
+    UsersmanagerComponent,
+    UsersComponent,
+    ShowUserComponent,
+    AddEditUsersComponent
+>>>>>>> a10a9546aca06f078aaa63ae68a6ffd6cf024aa9
     
   ],
   imports: [
@@ -52,7 +76,9 @@ import { AapApiService } from './services/aap-api.service';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AapApiService],
+  providers: [
+    AuthService,
+    AapApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
