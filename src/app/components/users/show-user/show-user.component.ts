@@ -15,6 +15,7 @@ export class ShowUserComponent implements OnInit {
   currentPage = 1;
   sortColumn: string = 'lastname';
   sortDirection: string = 'asc';
+  roleFilter: number | null = null;
 
   constructor(private service: AapApiService) { }
 
@@ -24,14 +25,28 @@ export class ShowUserComponent implements OnInit {
 
   loadUsers() {
     this.userList$ = this.service.getUserList().pipe(
-      map(users => users.sort((a, b) => this.sortDirection === 'asc' ? a[this.sortColumn].localeCompare(b[this.sortColumn]) : b[this.sortColumn].localeCompare(a[this.sortColumn])))
+      map(users => users.sort((a, b) => {
+        const valueA = typeof a[this.sortColumn] === 'string' ? a[this.sortColumn].toLowerCase() : a[this.sortColumn];
+        const valueB = typeof b[this.sortColumn] === 'string' ? b[this.sortColumn].toLowerCase() : b[this.sortColumn];
+        if (valueA < valueB) {
+          return this.sortDirection === 'asc' ? -1 : 1;
+        } else if (valueA > valueB) {
+          return this.sortDirection === 'asc' ? 1 : -1;
+        } else {
+          return 0;
+        }
+      }))
     );
     this.updateFilteredUserList();
   }
 
   updateFilteredUserList() {
     this.userList$.subscribe(userList => {
-      this.filteredUserList.next(userList);
+      let filtered = userList;
+      if (this.roleFilter !== null) {
+        filtered = filtered.filter(user => user.role === this.roleFilter);
+      }
+      this.filteredUserList.next(filtered);
     });
   }
 
@@ -40,10 +55,7 @@ export class ShowUserComponent implements OnInit {
     this.userList$.subscribe(userList => {
       const filtered = userList.filter(user => {
         const value = user[column as keyof typeof user];
-        if (column === 'role') {
-          // Special case for filtering role
-          return this.getRoleName(value).toLowerCase().includes(searchTerm);
-        } else if (typeof value === 'string') {
+        if (typeof value === 'string') {
           return value.toLowerCase().includes(searchTerm);
         } else if (typeof value === 'number') {
           return value.toString().includes(searchTerm);
@@ -52,6 +64,12 @@ export class ShowUserComponent implements OnInit {
       });
       this.filteredUserList.next(filtered);
     });
+  }
+
+  filterRole(event: Event) {
+    const roleValue = parseInt((event.target as HTMLSelectElement).value, 10);
+    this.roleFilter = isNaN(roleValue) ? null : roleValue;
+    this.updateFilteredUserList();
   }
 
   sortByColumn(column: string) {
@@ -83,30 +101,31 @@ export class ShowUserComponent implements OnInit {
       password: null,
       phone: null,
       role: null
-    }
-    this.modalTitle = "Ajouter un utilisateur";
+    };
+
+    this.modalTitle = "Add User";
     this.activateAddEditUserComponent = true;
   }
 
   delete(item: any) {
     if (confirm(`Are you sure you want to delete User ${item.id}`)) {
       this.service.deleteUser(item.id).subscribe(res => {
-        var closeModalBtn = document.getElementById('add-edit-modal-close');
+        const closeModalBtn = document.getElementById('add-edit-modal-close');
         if (closeModalBtn) {
           closeModalBtn.click();
         }
 
-        var showDeleteSuccess = document.getElementById('delete-success-alert');
+        const showDeleteSuccess = document.getElementById('delete-success-alert');
         if (showDeleteSuccess) {
           showDeleteSuccess.style.display = "block";
         }
-        setTimeout(function () {
+        setTimeout(() => {
           if (showDeleteSuccess) {
-            showDeleteSuccess.style.display = "none"
+            showDeleteSuccess.style.display = "none";
           }
         }, 4000);
         this.loadUsers();
-      })
+      });
     }
   }
 

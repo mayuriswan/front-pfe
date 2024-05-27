@@ -66,7 +66,9 @@ import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exempl
     PostulerComponent,
     HeaderInfoComponent,
     ExempleAapComponent,
-    ExempleAapPostulerComponent
+    ExempleAapPostulerComponent,
+    AddEditUsersComponent
+
     
   ],
   imports: [
