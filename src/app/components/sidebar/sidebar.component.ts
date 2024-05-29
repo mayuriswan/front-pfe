@@ -8,12 +8,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  
   isOpen = false;
+  user: any;
 
   constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = this.authService.getCurrentUser();
+  }
 
   toggleSidebar(): void {
     this.isOpen = !this.isOpen;
@@ -26,5 +28,4 @@ export class SidebarComponent implements OnInit {
   navigateTo(route: string): void {
     this.router.navigateByUrl(route);
   }
-
 }
