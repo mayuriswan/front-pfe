@@ -6,18 +6,13 @@
                 <input type="text" placeholder="Nom" class="rounded-input" [(ngModel)]="lastname" name="lastname" required />
                 <input type="text" placeholder="Prénom" class="rounded-input" [(ngModel)]="firstname" name="firstname" required />
                 <input type="text" placeholder="Phone" class="rounded-input" [(ngModel)]="phone" name="phone" required />
-                <input type="email" placeholder="Email" class="rounded-input" [(ngModel)]="email" name="email" required email />
                 <input type="password" placeholder="Mot de passe" class="rounded-input" [(ngModel)]="password" name="password" required />
-                <button type="submit" [disabled]="!signupForm.valid" style="margin-bottom: 10px;">Créer un compte</button>
             </form>
         </div>
         <div class="form-container sign-in-container">
-            <form (ngSubmit)="onSubmitSignin()" #signinForm="ngForm">
                 <h1>Se connecter</h1>
-                <input type="email" placeholder="Email" class="rounded-input" [(ngModel)]="signinEmail" name="signinEmail" required email />
                 <input type="password" placeholder="Mot de passe" class="rounded-input" [(ngModel)]="signinPassword" name="signinPassword" required />
                 <a href="#">Vous avez oublié votre mot de passe ?</a>
-                <button type="submit" [disabled]="!signinForm.valid">Se connecter</button>
             </form>
         </div>
         <div class="overlay-container">
@@ -42,9 +37,5 @@
         <p>Cet email existe déjà dans notre base de données</p>
         <hr>
         <p class="mb-0">Choisissez un autre email si vous voulez vous inscrire</p>
-    </div>
-    <div *ngIf="loginError" class="alert alert-danger" role="alert">
-        <h4 class="alert-heading">Échec de la connexion</h4>
-        <p>Les informations d'identification fournies sont incorrectes. Veuillez réessayer.</p>
     </div>
 </div>

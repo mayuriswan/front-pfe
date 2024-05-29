@@ -18,7 +18,6 @@ export class LoginFormComponent implements AfterViewInit {
   signinPassword: string = '';
   emailError: boolean = false;
   emailErrorFade: boolean = false;
-  loginError: boolean = false;
 
   constructor(
     private elementRef: ElementRef,
@@ -74,17 +73,6 @@ export class LoginFormComponent implements AfterViewInit {
   }
 
   onSubmitSignin() {
-    this.authService.login(this.signinEmail, this.signinPassword).subscribe(
-      response => {
-        console.log('Login successful', response);
-      },
-      error => {
-        console.error('Login failed', error);
-        this.loginError = true;
-        setTimeout(() => {
-          this.loginError = false;
-        }, 3000);
-      }
-    );
+    this.authService.login(this.signinEmail, this.signinPassword);
   }
 }
