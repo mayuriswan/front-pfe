@@ -15,7 +15,6 @@ export class ShowUserComponent implements OnInit {
   currentPage = 1;
   sortColumn: string = 'lastname';
   sortDirection: string = 'asc';
-  roleFilter: number | null = null;
 
   constructor(private service: AapApiService) { }
 
@@ -25,33 +24,14 @@ export class ShowUserComponent implements OnInit {
 
   loadUsers() {
     this.userList$ = this.service.getUserList().pipe(
-      map(users => users.sort((a, b) => {
-        const valueA = typeof a[this.sortColumn] === 'string' ? a[this.sortColumn].toLowerCase() : a[this.sortColumn];
-        const valueB = typeof b[this.sortColumn] === 'string' ? b[this.sortColumn].toLowerCase() : b[this.sortColumn];
-  
-        if (valueA < valueB) {
-          return this.sortDirection === 'asc' ? -1 : 1;
-        } else if (valueA > valueB) {
-          return this.sortDirection === 'asc' ? 1 : -1;
-        } else {
-          return 0;
-        }
-      }))
+      map(users => users.sort((a, b) => this.sortDirection === 'asc' ? a[this.sortColumn].localeCompare(b[this.sortColumn]) : b[this.sortColumn].localeCompare(a[this.sortColumn])))
     );
-  
+    this.updateFilteredUserList();
+  }
+
+  updateFilteredUserList() {
     this.userList$.subscribe(userList => {
-      console.log('userList:', userList);
-      let filtered = userList;
-      if (this.roleFilter !== null) {
-        filtered = filtered.filter(user => {
-          console.log('user:', user);
-          console.log('user.role:', user.role);
-          console.log('this.roleFilter:', this.roleFilter);
-          return this.roleFilter === null || user.role === this.roleFilter;
-        });
-      }
-      console.log('filtered:', filtered);
-      this.filteredUserList.next(filtered);
+      this.filteredUserList.next(userList);
     });
   }
 
@@ -60,7 +40,10 @@ export class ShowUserComponent implements OnInit {
     this.userList$.subscribe(userList => {
       const filtered = userList.filter(user => {
         const value = user[column as keyof typeof user];
-        if (typeof value === 'string') {
+        if (column === 'role') {
+          // Special case for filtering role
+          return this.getRoleName(value).toLowerCase().includes(searchTerm);
+        } else if (typeof value === 'string') {
           return value.toLowerCase().includes(searchTerm);
         } else if (typeof value === 'number') {
           return value.toString().includes(searchTerm);
@@ -69,14 +52,6 @@ export class ShowUserComponent implements OnInit {
       });
       this.filteredUserList.next(filtered);
     });
-  }
-
-  filterRole(event: Event) {
-    const roleValue = parseInt((event.target as HTMLSelectElement).value, 10);
-    console.log('roleValue:', roleValue);
-    this.roleFilter = isNaN(roleValue) ? null : roleValue;
-    console.log('this.roleFilter:', this.roleFilter);
-    this.loadUsers();
   }
 
   sortByColumn(column: string) {
@@ -88,6 +63,7 @@ export class ShowUserComponent implements OnInit {
     }
     this.loadUsers();
   }
+
   modalTitle: string = '';
   activateAddEditUserComponent: boolean = false;
   user: any;
@@ -108,7 +84,7 @@ export class ShowUserComponent implements OnInit {
       phone: null,
       role: null
     }
-    this.modalTitle = "Add User";
+    this.modalTitle = "Ajouter un utilisateur";
     this.activateAddEditUserComponent = true;
   }
 

@@ -38,12 +38,7 @@
                           </th>
                           <th scope="col" (click)="sortByColumn('role')">
                             Role
-                            <select class="form-select form-select-sm" (change)="filterRole($event)">
-                              <option value="">All</option>
-                              <option value="0">utilisateur normale</option>
-                              <option value="1">admin</option>
-                              <option value="2">superieur</option>
-                            </select>                      
+                            <input type="text" class="form-control form-control-sm" placeholder="Search" (input)="filterColumn('role', $event)">
                           </th>
                           <th scope="col">Option</th>
                         </tr>

@@ -2,6 +2,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'; // Ajout du module
+
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +34,15 @@ import { UsersmanagerComponent } from './pages/usersmanager/usersmanager.compone
 import { UsersComponent } from './components/users/users.component';
 import { ShowUserComponent } from './components/users/show-user/show-user.component';
 import { AddEditUsersComponent } from './components/users/add-edit-users/add-edit-users.component';
+import { LanceraapComponent } from './pages/lanceraap/lanceraap.component';
+import { FormCreateAapComponent } from './components/form-create-aap/form-create-aap.component';
+import { CompoPostulerComponent } from './components/compo-postuler/compo-postuler.component';
+import { PostulerComponent } from './pages/postuler/postuler.component';
+import { HeaderInfoComponent } from './components/header-info/header-info.component';
+import { ExempleAapComponent } from './components/exemple-aap/exemple-aap.component';
+import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exemple-aap-postuler.component';
+import { FormService } from './components/form-create-aap/form.service';
+import { CountryService } from './components/form-create-aap/country.service.';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +63,14 @@ import { AddEditUsersComponent } from './components/users/add-edit-users/add-edi
     UsersmanagerComponent,
     UsersComponent,
     ShowUserComponent,
-    AddEditUsersComponent
+    AddEditUsersComponent,
+    LanceraapComponent,
+    FormCreateAapComponent,
+    CompoPostulerComponent,
+    PostulerComponent,
+    HeaderInfoComponent,
+    ExempleAapComponent,
+    ExempleAapPostulerComponent
     
   ],
   imports: [
@@ -60,11 +80,16 @@ import { AddEditUsersComponent } from './components/users/add-edit-users/add-edi
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot() // Initialisation du module
   ],
   providers: [
     AuthService,
-    AapApiService],
+    AapApiService,
+    FormService,
+    CountryService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
