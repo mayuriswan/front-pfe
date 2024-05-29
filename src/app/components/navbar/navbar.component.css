@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background-color: transparent;
+  background-color: #f9fbfd;
 }
 
 .logo {
@@ -17,7 +17,7 @@
 .logo img {
   width: 100px;
   height: auto;
-  filter: brightness(0) invert(100%);
+  filter: brightness(100%) invert(0);
 }
 
 .nav-menu {
@@ -30,7 +30,7 @@
   font-family: Arial, sans-serif;
   font-weight: 500;
   text-decoration: none;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   position: relative;
   padding-bottom: 0.5rem;
 }
@@ -47,7 +47,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(37, 184, 237);
   transition: width 0.3s ease;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: #f8f9fa;
+  background-color: #f6f6f7;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -135,16 +135,17 @@
   justify-content: center;
   height: 40px;
   padding: 0 16px;
-  border-radius: 1000px;
+  border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
   text-decoration: none;
-  transition: background-color 0.3s ease;
-  color: #fff;
-  border: 1px solid #fff;
-  background-color: transparent;
+  transition: background 0.3s ease;
+  color: #ffffff;
+  background: linear-gradient(to right, #0056b3, #007bff);
+  border: none;
+  cursor: pointer;
 }
 
 .auth-button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(to right, #003d80, #0056b3);
 }

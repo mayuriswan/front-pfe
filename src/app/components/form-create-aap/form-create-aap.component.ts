@@ -9,9 +9,15 @@ import { CountryService } from '../form-create-aap/country.service.';
 })
 export class FormCreateAapComponent implements OnInit {
   activeTab: string = 'evaluation';
-  customForm!: FormGroup; // Utilisation de l'affirmation non-null !
+  customForm!: FormGroup;
   countries: any[] = [];
   dropdownSettings = {};
+  modalOpen: boolean = false;
+  evaluationForms: any[] = [
+    { id: 1, name: 'Form 1' },
+    { id: 2, name: 'Form 2' },
+    { id: 3, name: 'Form 3' }
+  ]; // Add your evaluation form data here
 
   constructor(private fb: FormBuilder, private countryService: CountryService) { }
 
@@ -26,7 +32,7 @@ export class FormCreateAapComponent implements OnInit {
       duree_minimale: [1, [Validators.required, Validators.min(1)]],
       duree_maximale: [1, [Validators.required, Validators.min(1)]],
       Task_type: [''],
-      Pays_autorises: [[], Validators.required], // Utilisation de FormControl pour la sélection multiple
+      Pays_autorises: [[], Validators.required],
       Budget_separe: [false],
       Post_budget: ['', Validators.required],
       Date_publication: ['', Validators.required],
@@ -39,63 +45,66 @@ export class FormCreateAapComponent implements OnInit {
 
     this.loadCountries();
     this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
-      allowSearchFilter: true
+    singleSelection: false,
+    idField: 'item_id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true
     };
-  }
-
-  initCriteria() {
+    }
+    initCriteria() {
     return [
-      this.fb.group({ title: ['', Validators.required], score: [null, [Validators.required, Validators.min(0), Validators.max(100)]] }),
-      this.fb.group({ title: ['', Validators.required], score: [null, [Validators.required, Validators.min(0), Validators.max(100)]] })
+    this.fb.group({ title: ['', Validators.required], score: [null, [Validators.required, Validators.min(0), Validators.max(100)]] }),
+    this.fb.group({ title: ['', Validators.required], score: [null, [Validators.required, Validators.min(0), Validators.max(100)]] })
     ];
-  }
-
-  get criteria(): FormArray {
+    }
+    get criteria(): FormArray {
     return this.customForm.get('criteria') as FormArray;
-  }
-
-  addCriterion(event: Event): void {
+    }
+    addCriterion(event: Event): void {
     event.preventDefault();
     this.criteria.push(this.fb.group({ title: ['', Validators.required], score: [null, [Validators.required, Validators.min(0), Validators.max(100)]] }));
-  }
-
-  setActiveTab(event: Event, tab: string) {
+    }
+    setActiveTab(event: Event, tab: string) {
     event.preventDefault();
     this.activeTab = tab;
-  }
-
-  loadCountries(): void {
-    this.countryService.getCountries().subscribe(
-      (data: any) => {
-        this.countries = data.map((country: any) => ({
-          item_id: country.cca3, // Utilisation d'un code unique
-          item_text: country.name.common
-        })).sort((a: any, b: any) => a.item_text.localeCompare(b.item_text));
-      },
-      (error: any) => {
-        console.error('Error loading countries', error);
-      }
-    );
-  }
-
-  onSubmit(): void {
-    if (this.customForm.valid) {
-      const formData = {
-        ...this.customForm.value,
-        Pays_autorises: this.customForm.value.Pays_autorises.map((country: any) => country.item_text)
-      };
-
-      console.log(formData);
-      // Here, you can make an HTTP request to submit the form data to your backend
-      // Example: this.http.post('your-api-endpoint', formData).subscribe(response => { ... });
-    } else {
-      console.log('Form is invalid');
     }
+    loadCountries(): void {
+    this.countryService.getCountries().subscribe(
+    (data: any) => {
+    this.countries = data.map((country: any) => ({
+    item_id: country.cca3,
+    item_text: country.name.common
+    })).sort((a: any, b: any) => a.item_text.localeCompare(b.item_text));
+    },
+    (error: any) => {
+    console.error('Error loading countries', error);
+    }
+    );
+    }
+    openModal(): void {
+    this.modalOpen = true;
+    }
+    closeModal(): void {
+    this.modalOpen = false;
+    }
+    selectForm(form: any): void {
+    this.customForm.patchValue({ Formulaire_evaluation: form.name });
+    this.closeModal();
+    }
+    onSubmit(): void {
+    if (this.customForm.valid) {
+    const formData = {
+    ...this.customForm.value,
+    Pays_autorises: this.customForm.value.Pays_autorises.map((country: any) => country.item_text)
+    };
+    console.log(formData);
+    // Here, you can make an HTTP request to submit the form data to your backend
+    // Example: this.http.post('your-api-endpoint', formData).subscribe(response => { ... });
+  } else {
+    console.log('Form is invalid');
   }
+}
 }

@@ -1,236 +1,254 @@
 <form [formGroup]="customForm" (ngSubmit)="onSubmit()">
-    <div class="row justify-content-center">
-      <div class="col-lg-10">
-        <div class="card mt-4">
-          <div class="card-header text-white">
-            Lancer un Appel à projet
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="card mt-4">
+        <div class="card-header text-white">
+          Lancer un Appel à projet
+        </div>
+        <div class="card-body">
+          <div class="info-bar">
+            <div class="info-item">
+              <i class="fas fa-file-alt"></i>
+              <span>0 Soumissions</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-folder"></i>
+              <span>0 Documents</span>
+            </div>
+            <div class="info-item">
+              <i class="fas fa-globe"></i>
+              <span class="status non-publie">Non publié</span>
+            </div>
           </div>
-          <div class="card-body">
-            <div class="info-bar">
-              <div class="info-item">
-                <i class="fas fa-file-alt"></i>
-                <span>0 Soumissions</span>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-folder"></i>
-                <span>0 Documents</span>
-              </div>
-              <div class="info-item">
-                <i class="fas fa-globe"></i>
-                <span class="status non-publie">Non publié</span>
-              </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label small-label" for="Nom">Nom</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control small-input" id="Nom" formControlName="Nom">
             </div>
-  
-            <!-- Section Nom et Description -->
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label small-label" for="Nom">Nom</label>
-              <div class="col-sm-4">
-                <input type="text" class="form-control small-input" id="Nom" formControlName="Nom">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label small-label" for="Description">Description</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control small-input" id="Description" formControlName="Description">
-              </div>
-            </div>
-  
-            <!-- Espace entre les sections -->
-            <div class="my-2"></div>
-  
-            <!-- Section des autres éléments -->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="responsable">Responsable</label>
-                  <div class="col-sm-8">
-                    <select class="form-control small-input" id="responsable" formControlName="responsable">
-                      <option value="Administrateur">Administrateur</option>
-                      <option value="Evaluateur">Évaluateur</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Category">Catégorie</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control small-input" id="Category" formControlName="Category">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="institut_hote">Institut hôte</label>
-                  <div class="col-sm-8">
-                    <select class="form-control small-input" id="institut_hote" formControlName="institut_hote">
-                      <option value="IRESEN">IRESEN</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label small-label" for="budget">Budget</label>
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control small-input" id="budget" formControlName="budget" step="0.01">
-                      <div *ngIf="customForm.get('budget')?.invalid && (customForm.get('budget')?.touched || customForm.get('budget')?.dirty)" class="text-danger">
-                        Le budget doit être un nombre non négatif.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label small-label" for="duree_minimale">Durée minimale (en semestre)</label>
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control small-input" id="duree_minimale" formControlName="duree_minimale" min="1">
-                      <div *ngIf="customForm.get('duree_minimale')?.invalid && (customForm.get('duree_minimale')?.touched || customForm.get('duree_minimale')?.dirty)" class="text-danger">
-                        La durée minimale doit être au moins 1 semestre.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label class="col-sm-4 col-form-label small-label" for="duree_maximale">Durée maximale (en semestre)</label>
-                    <div class="col-sm-8">
-                      <input type="number" class="form-control small-input" id="duree_maximale" formControlName="duree_maximale" min="1">
-                      <div *ngIf="customForm.get('duree_maximale')?.invalid && (customForm.get('duree_maximale')?.touched || customForm.get('duree_maximale')?.dirty)" class="text-danger">
-                        La durée maximale doit être au moins 1 semestre.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              <div class="col-md-6">
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Task_type">Type de tâche</label>
-                  <div class="col-sm-8">
-                    <select class="form-control small-input" id="Task_type" formControlName="Task_type">
-                      <option value=" "></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label small-label" for="Pays_autorises">Pays autorisés</label>
-                    <div class="col-sm-8">
-                      <ng-multiselect-dropdown
-                        [placeholder]="'  '"
-                        [data]="countries"
-                        [settings]="dropdownSettings"
-                        formControlName="Pays_autorises">
-                      </ng-multiselect-dropdown>
-                    </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Budget_separe">Budget séparé</label>
-                  <div class="col-sm-8">
-                    <input type="checkbox" class="small-input" id="Budget_separe" formControlName="Budget_separe">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Post_budget">Post Budget</label>
-                  <div class="col-sm-8">
-                    <select class="form-control small-input" id="Post_budget" formControlName="Post_budget">
-                      <option value=" "></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Date_publication">Date de publication</label>
-                  <div class="col-sm-8">
-                    <input type="date" class="form-control small-input" id="Date_publication" formControlName="Date_publication">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Date_cloture">Date de clôture</label>
-                  <div class="col-sm-8">
-                    <input type="date" class="form-control small-input" id="Date_cloture" formControlName="Date_cloture">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Soumission_acceptee">Soumission acceptée</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control small-input" id="Soumission_acceptee" formControlName="Soumission_acceptee" readonly>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="Formulaire_evaluation">Formulaire d'évaluation</label>
-                  <div class="col-sm-8">
-                    <select class="form-control small-input" id="Formulaire_evaluation" formControlName="Formulaire_evaluation">
-                      <option value=" "></option>
-                    </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label class="col-sm-4 col-form-label small-label" for="exampleFormControlFile1">Documents</label>
-                  <div class="col-sm-8">
-                    <input type="file" class="form-control-file small-input" id="exampleFormControlFile1" formControlName="Documents">
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-12 text-center">
-                <button type="submit" class="btn btn-primary mx-2 small-btn">Enregistrer</button>
-                <button type="reset" class="btn btn-secondary mx-2 small-btn">Annuler</button>
-              </div>
-            </div>
-  
-            <div class="tabs">
-              <ul class="tab-links">
-                <li [ngClass]="{'active': activeTab === 'evaluation'}">
-                  <a href="#" (click)="setActiveTab($event, 'evaluation')">Évaluation</a>
-                </li>
-                <li [ngClass]="{'active': activeTab === 'evaluateurs'}">
-                  <a href="#" (click)="setActiveTab($event, 'evaluateurs')">Évaluateurs</a>
-                </li>
-              </ul>
-              <div class="tab-content">
-                <div id="evaluation" class="tab" [ngClass]="{'active': activeTab === 'evaluation'}">
-                  <table class="styled-table">
-                    <thead>
-                      <tr>
-                        <th>Titre</th>
-                        <th>Base de notation (0-100)</th>
-                      </tr>
-                    </thead>
-                    <tbody formArrayName="criteria">
-                      <tr *ngFor="let criterion of criteria.controls; let i = index" [formGroupName]="i">
-                        <td>
-                          <input type="text" class="form-control" formControlName="title" placeholder=" ">
-                        </td>
-                        <td>
-                          <input type="number" class="form-control" formControlName="score" min="0" max="100" placeholder=" ">
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><a href="#" (click)="addCriterion($event)" class="add-line">Ajouter une ligne</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div id="evaluateurs" class="tab" [ngClass]="{'active': activeTab === 'evaluateurs'}">
-                  <table class="styled-table">
-                    <thead>
-                      <tr>
-                        <th>Évaluateur</th>
-                        <th>Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <select class="form-control">
-                            <!-- Options ajoutées dynamiquement via le backend -->
-                            <option value="1">Évaluateur 1</option>
-                            <option value="2">Évaluateur 2</option>
-                          </select>
-                        </td>
-                        <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
-                      </tr>
-                      <tr>
-                        <td colspan="2"><a href="#" class="add-line">Ajouter un évaluateur</a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-  
           </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label small-label" for="Description">Description</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control small-input" id="Description" formControlName="Description">
+            </div>
+          </div>
+          
+          <div class="my-2"></div>
+          
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="responsable">Responsable</label>
+                <div class="col-sm-8">
+                  <select class="form-control small-input" id="responsable" formControlName="responsable">
+                    <option value="Administrateur">Administrateur</option>
+                    <option value="Evaluateur">Évaluateur</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Category">Catégorie</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control small-input" id="Category" formControlName="Category">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="institut_hote">Institut hôte</label>
+                <div class="col-sm-8">
+                  <select class="form-control small-input" id="institut_hote" formControlName="institut_hote">
+                    <option value="IRESEN">IRESEN</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="budget">Budget</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control small-input" id="budget" formControlName="budget" step="0.01">
+                  <div *ngIf="customForm.get('budget')?.invalid && (customForm.get('budget')?.touched || customForm.get('budget')?.dirty)" class="text-danger">
+                    Le budget doit être un nombre non négatif.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="duree_minimale">Durée minimale (en semestre)</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control small-input" id="duree_minimale" formControlName="duree_minimale" min="1">
+                  <div *ngIf="customForm.get('duree_minimale')?.invalid && (customForm.get('duree_minimale')?.touched || customForm.get('duree_minimale')?.dirty)" class="text-danger">
+                    La durée minimale doit être au moins 1 semestre.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="duree_maximale">Durée maximale (en semestre)</label>
+                <div class="col-sm-8">
+                  <input type="number" class="form-control small-input" id="duree_maximale" formControlName="duree_maximale" min="1">
+                  <div *ngIf="customForm.get('duree_maximale')?.invalid && (customForm.get('duree_maximale')?.touched || customForm.get('duree_maximale')?.dirty)" class="text-danger">
+                    La durée maximale doit être au moins 1 semestre.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Task_type">Type de tâche</label>
+                <div class="col-sm-8">
+                  <select class="form-control small-input" id="Task_type" formControlName="Task_type">
+                    <option value=" "></option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Pays_autorises">Pays autorisés</label>
+                <div class="col-sm-8">
+                  <ng-multiselect-dropdown
+                    [placeholder]="'  '"
+                    [data]="countries"
+                    [settings]="dropdownSettings"
+                    formControlName="Pays_autorises">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Budget_separe">Budget séparé</label>
+                <div class="col-sm-8">
+                  <input type="checkbox" class="small-input" id="Budget_separe" formControlName="Budget_separe">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Post_budget">Post Budget</label>
+                <div class="col-sm-8">
+                  <select class="form-control small-input" id="Post_budget" formControlName="Post_budget">
+                    <option value=" "></option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Date_publication">Date de publication</label>
+                <div class="col-sm-8">
+                  <input type="date" class="form-control small-input" id="Date_publication" formControlName="Date_publication">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Date_cloture">Date de clôture</label>
+                <div class="col-sm-8">
+                  <input type="date" class="form-control small-input" id="Date_cloture" formControlName="Date_cloture">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Soumission_acceptee">Soumission acceptée</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control small-input" id="Soumission_acceptee" formControlName="Soumission_acceptee" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="Formulaire_evaluation">Formulaire d'évaluation</label>
+                <div class="col-sm-8">
+                  <div class="input-group">
+                    <input type="text" class="form-control small-input" id="Formulaire_evaluation" formControlName="Formulaire_evaluation" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary small-btn" type="button" (click)="openModal()">Sélectionner</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label small-label" for="exampleFormControlFile1">Documents</label>
+                <div class="col-sm-8">
+                  <input type="file" class="form-control-file small-input" id="exampleFormControlFile1" formControlName="Documents">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-12 text-center">
+              <button type="submit" class="btn btn-primary mx-2 small-btn">Enregistrer</button>
+              <button type="reset" class="btn btn-secondary mx-2 small-btn">Annuler</button>
+            </div>
+          </div>
+          
+          <div class="tabs">
+            <ul class="tab-links">
+              <li [ngClass]="{'active': activeTab === 'evaluation'}">
+                <a href="#" (click)="setActiveTab($event, 'evaluation')">Évaluation</a>
+              </li>
+              <li [ngClass]="{'active': activeTab === 'evaluateurs'}">
+                <a href="#" (click)="setActiveTab($event, 'evaluateurs')">Évaluateurs</a>
+              </li>
+            </ul>
+            <div class="tab-content">
+              <div id="evaluation" class="tab" [ngClass]="{'active': activeTab === 'evaluation'}">
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th>Titre</th>
+                      <th>Base de notation (0-100)</th>
+                    </tr>
+                  </thead>
+                  <tbody formArrayName="criteria">
+                    <tr *ngFor="let criterion of criteria.controls; let i = index" [formGroupName]="i">
+                      <td>
+                        <input type="text" class="form-control" formControlName="title" placeholder=" ">
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" formControlName="score" min="0" max="100" placeholder=" ">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><a href="#" (click)="addCriterion($event)" class="add-line">Ajouter une ligne</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div id="evaluateurs" class="tab" [ngClass]="{'active': activeTab === 'evaluateurs'}">
+                <table class="styled-table">
+                  <thead>
+                    <tr>
+                      <th>Évaluateur</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select class="form-control">
+                          <option value="1">Évaluateur 1</option>
+                          <option value="2">Évaluateur 2</option>
+                        </select>
+                      </td>
+                      <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td colspan="2"><a href="#" class="add-line">Ajouter un évaluateur</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
         </div>
       </div>
     </div>
-  </form>
-  
+  </div>
+</form>
+
+<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': modalOpen}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Sélectionner un formulaire d'évaluation</h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let form of evaluationForms">
+            <a href="#" (click)="selectForm(form)">{{ form.name }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

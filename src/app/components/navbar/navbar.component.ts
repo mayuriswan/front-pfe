@@ -16,4 +16,8 @@ export class NavbarComponent {
   isAccueilPage() {
     return this.router.url === '/accueil' || this.router.url === '/';
   }
+
+  isLoginPage() {
+    return this.router.url === '/login';
+  }
 }
