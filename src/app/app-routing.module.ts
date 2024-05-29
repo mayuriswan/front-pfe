@@ -11,6 +11,7 @@ import { PostulerComponent } from './pages/postuler/postuler.component';
 import { ExempleAapComponent } from './components/exemple-aap/exemple-aap.component';
 import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exemple-aap-postuler.component';
 
+
 const routes: Routes = [
   { path: 'accueil', component: AccueilComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -20,6 +21,10 @@ const routes: Routes = [
   { path: 'lanceraap', component: LanceraapComponent },
   { path: 'postuler', component: PostulerComponent },
   { path: 'exemple-aap-postuler', component:ExempleAapPostulerComponent },
+  { path: 'usersmanager', component:UsersmanagerComponent},
+
+
+
   { path: '', redirectTo: '/accueil', pathMatch: 'full' },
   { path: '**', redirectTo: '/accueil' }
 ];

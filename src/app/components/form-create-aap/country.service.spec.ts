@@ -1,9 +1,9 @@
-import { ComponentFixture } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormCreateAapComponent } from './form-create-aap.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CountryService } from '../form-create-aap/country.service.';
 import { TestBed, async } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from '@angular/common/http/testing'; // Utilisation de HttpClientTestingModule pour les tests HTTP
+
+import { FormCreateAapComponent } from './form-create-aap.component';
+import { CountryService } from '../form-create-aap/country.service.';
 
 describe('FormCreateAapComponent', () => {
   beforeEach(async(() => {
