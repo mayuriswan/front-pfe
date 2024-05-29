@@ -3,6 +3,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -30,6 +32,13 @@ import { UsersmanagerComponent } from './pages/usersmanager/usersmanager.compone
 import { UsersComponent } from './components/users/users.component';
 import { ShowUserComponent } from './components/users/show-user/show-user.component';
 import { AddEditUsersComponent } from './components/users/add-edit-users/add-edit-users.component';
+import { LanceraapComponent } from './pages/lanceraap/lanceraap.component';
+import { FormCreateAapComponent } from './components/form-create-aap/form-create-aap.component';
+import { CompoPostulerComponent } from './components/compo-postuler/compo-postuler.component';
+import { PostulerComponent } from './pages/postuler/postuler.component';
+import { HeaderInfoComponent } from './components/header-info/header-info.component';
+import { ExempleAapComponent } from './components/exemple-aap/exemple-aap.component';
+import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exemple-aap-postuler.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,7 +59,16 @@ import { AddEditUsersComponent } from './components/users/add-edit-users/add-edi
     UsersmanagerComponent,
     UsersComponent,
     ShowUserComponent,
+    AddEditUsersComponent,
+    LanceraapComponent,
+    FormCreateAapComponent,
+    CompoPostulerComponent,
+    PostulerComponent,
+    HeaderInfoComponent,
+    ExempleAapComponent,
+    ExempleAapPostulerComponent,
     AddEditUsersComponent
+
     
   ],
   imports: [
@@ -68,3 +86,4 @@ import { AddEditUsersComponent } from './components/users/add-edit-users/add-edi
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

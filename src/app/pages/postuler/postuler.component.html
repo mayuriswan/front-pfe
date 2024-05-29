@@ -1,0 +1,23 @@
+<div class="sidebar-container">
+    <app-header-info></app-header-info>
+    <header class="navbar">
+        <a class="logo" href="#"><img src="assets/Images/iresenlogo.png" alt="Iresen Inc Logo"></a>
+        <nav class="nav-menu">
+          <a class="nav-link" [routerLink]="['/']">Accueil</a>
+          <a class="nav-link" href="#">Agence de moyens</a>
+          <a class="nav-link" href="#">Thématiques</a>
+          <a class="nav-link" href="#">Mutualisation des services</a>
+          <div class="dropdown">
+            <a class="nav-link" href="#">Appel à projet en cours</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Green INNOBOOST 2.0</a>
+              <a class="dropdown-item" href="#">Appel à Project 2</a>
+              <a class="dropdown-item" href="#">Appel à Project 3</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+      
+    <app-compo-postuler></app-compo-postuler>
+    <app-footer></app-footer>
+</div>

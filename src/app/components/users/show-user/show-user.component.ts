@@ -28,7 +28,6 @@ export class ShowUserComponent implements OnInit {
       map(users => users.sort((a, b) => {
         const valueA = typeof a[this.sortColumn] === 'string' ? a[this.sortColumn].toLowerCase() : a[this.sortColumn];
         const valueB = typeof b[this.sortColumn] === 'string' ? b[this.sortColumn].toLowerCase() : b[this.sortColumn];
-  
         if (valueA < valueB) {
           return this.sortDirection === 'asc' ? -1 : 1;
         } else if (valueA > valueB) {
@@ -38,19 +37,15 @@ export class ShowUserComponent implements OnInit {
         }
       }))
     );
-  
+    this.updateFilteredUserList();
+  }
+
+  updateFilteredUserList() {
     this.userList$.subscribe(userList => {
-      console.log('userList:', userList);
       let filtered = userList;
       if (this.roleFilter !== null) {
-        filtered = filtered.filter(user => {
-          console.log('user:', user);
-          console.log('user.role:', user.role);
-          console.log('this.roleFilter:', this.roleFilter);
-          return this.roleFilter === null || user.role === this.roleFilter;
-        });
+        filtered = filtered.filter(user => user.role === this.roleFilter);
       }
-      console.log('filtered:', filtered);
       this.filteredUserList.next(filtered);
     });
   }
@@ -73,10 +68,8 @@ export class ShowUserComponent implements OnInit {
 
   filterRole(event: Event) {
     const roleValue = parseInt((event.target as HTMLSelectElement).value, 10);
-    console.log('roleValue:', roleValue);
     this.roleFilter = isNaN(roleValue) ? null : roleValue;
-    console.log('this.roleFilter:', this.roleFilter);
-    this.loadUsers();
+    this.updateFilteredUserList();
   }
 
   sortByColumn(column: string) {
@@ -88,6 +81,7 @@ export class ShowUserComponent implements OnInit {
     }
     this.loadUsers();
   }
+
   modalTitle: string = '';
   activateAddEditUserComponent: boolean = false;
   user: any;
@@ -107,7 +101,8 @@ export class ShowUserComponent implements OnInit {
       password: null,
       phone: null,
       role: null
-    }
+    };
+
     this.modalTitle = "Add User";
     this.activateAddEditUserComponent = true;
   }
@@ -115,22 +110,22 @@ export class ShowUserComponent implements OnInit {
   delete(item: any) {
     if (confirm(`Are you sure you want to delete User ${item.id}`)) {
       this.service.deleteUser(item.id).subscribe(res => {
-        var closeModalBtn = document.getElementById('add-edit-modal-close');
+        const closeModalBtn = document.getElementById('add-edit-modal-close');
         if (closeModalBtn) {
           closeModalBtn.click();
         }
 
-        var showDeleteSuccess = document.getElementById('delete-success-alert');
+        const showDeleteSuccess = document.getElementById('delete-success-alert');
         if (showDeleteSuccess) {
           showDeleteSuccess.style.display = "block";
         }
-        setTimeout(function () {
+        setTimeout(() => {
           if (showDeleteSuccess) {
-            showDeleteSuccess.style.display = "none"
+            showDeleteSuccess.style.display = "none";
           }
         }, 4000);
         this.loadUsers();
-      })
+      });
     }
   }
 

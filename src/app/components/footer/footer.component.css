@@ -1,0 +1,32 @@
+
+  .footer {
+    background-color: #f8f9fa;
+    color: #6c757d;
+  }
+  .footer a {
+    color: #6c757d;
+    transition: color 0.2s;
+  }
+  .footer a:hover {
+    color: #343a40;
+  }
+  .footer-logo-wrapper img {
+    max-width: 150px;
+    color: #6c757d;
+  }
+  .footer-logo-wrapper p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: #6c757d;
+  
+  }
+  .footer .nav-link {
+    font-size: 0.9rem;
+  }
+  .footer .fab {
+    color: #6c757d;
+    transition: color 0.2s;
+  }
+  .footer .fab:hover {
+    color: #343a40;
+  }

@@ -1,0 +1,224 @@
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <div class="card mt-4">
+            <div class="card-header text-white ">
+                Lancer un Appel à projet
+            </div>
+            <div class="card-body">
+                <div class="info-bar">
+                    <div class="info-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>0 Soumissions</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-folder"></i>
+                        <span>0 Documents</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-globe"></i>
+                        <span class="status non-publie">Non publié</span>
+                    </div>
+                </div>
+                <form>
+                    <!-- Section Nom et Description -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label small-label" for="Nom">Nom</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control small-input" id="Nom" name="Nom">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label small-label" for="Description">Description</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control small-input" id="Description" name="Description">
+                        </div>
+                    </div>
+
+                    <!-- Espace entre les sections -->
+                    <div class="my-2"></div>
+
+                    <!-- Section des autres éléments -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="responsable">Responsable</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="responsable" name="responsable" required>
+                                        <option value="Administrateur">Administrateur</option>
+                                        <option value="Evaluateur">Évaluateur</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Category">Catégorie</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control small-input" id="Category" name="Category">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="institut_hote">Institut hôte</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="institut_hote" name="institut hote">
+                                        <option value="IRESEN">IRESEN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="budget">Budget</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control small-input" id="budget" name="Budget" step="0.01">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="duree_minimale">Durée minimale (en semestre)</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control small-input" id="duree_minimale" name="duree minimale" min="1">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="duree_maximale">Durée maximale (en semestre)</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control small-input" id="duree_maximale" name="duree maximale" min="1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Task_type">Type de tâche</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="Task_type" name="Task type">
+                                        <option value=" "> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Pays_autorises">Pays autorisés</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="Pays_autorises" name="Pays autorisés">
+                                        <option value=" "> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Budget_separe">Budget séparé</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" class="small-input" id="Budget_separe" name="Budget séparé">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Post_budget">Post Budget</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="Post_budget" name="Post_budget" required>
+                                        <option value="  "></option>
+                                        <option value="   "></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Date_publication">Date de publication</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control small-input" id="Date_publication" name="Date publication">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Date_cloture">Date de clôture</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control small-input" id="Date_cloture" name="Date_cloture">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Soumission_acceptee">Soumission acceptée</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control small-input" id="Soumission_acceptee" name="Soumission acceptee" value="0" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="Formulaire_evaluation">Formulaire d'évaluation</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control small-input" id="Formulaire_evaluation" name="Formulaire d'évaluation" required>
+                                        <option value="  "></option>
+                                        <option value="   "></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label small-label" for="exampleFormControlFile1">Documents</label>
+                                <div class="col-sm-8">
+                                    <input type="file" class="form-control-file small-input" id="exampleFormControlFile1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-center">
+                            <button type="submit" class="btn btn-primary mx-2 small-btn">Enregistrer</button>
+                            <button type="reset" class="btn btn-secondary mx-2 small-btn">Annuler</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="tabs">
+                    <ul class="tab-links">
+                        <li [ngClass]="{'active': activeTab === 'evaluation'}">
+                           <a href="#" (click)="setActiveTab($event, 'evaluation')">Évaluation</a> 
+                        </li>
+                        <li [ngClass]="{'active': activeTab === 'evaluateurs'}">
+                           <a href="#" (click)="setActiveTab($event, 'evaluateurs')">Évaluateurs</a>  
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="evaluation" class="tab" [ngClass]="{'active': activeTab === 'evaluation'}">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Base de notation (0-100)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let criterion of criteria; let i = index">
+                                      <td>
+                                        <input type="text" [(ngModel)]="criterion.title" class="form-control" placeholder=" ">
+                                      </td>
+                                      <td>
+                                        <input type="number" min="0" max="100" [(ngModel)]="criterion.score" class="form-control" placeholder=" ">
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td colspan="2"><a href="#" (click)="addCriterion($event)" class="add-line">Ajouter une ligne</a></td>
+                                    </tr>
+                                  </tbody>
+                                  
+                            </table>
+                        </div>
+                        <div id="evaluateurs" class="tab" [ngClass]="{'active': activeTab === 'evaluateurs'}">
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Évaluateur</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <select class="form-control">
+                                                <!-- Options ajoutées dynamiquement via le backend -->
+                                                <option value="1">Évaluateur 1</option>
+                                                <option value="2">Évaluateur 2</option>
+                                            </select>
+                                        </td>
+                                        <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><a href="#" class="add-line">Ajouter un évaluateur</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin de la nouvelle section -->
+            </div>
+        </div>
+    </div>
+</div>
