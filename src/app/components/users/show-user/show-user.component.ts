@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class ShowUserComponent implements OnInit {
   userList$!: Observable<any[]>;
   filteredUserList = new BehaviorSubject<any[]>([]);
-  pageSize = 10;
+  pageSize = 5;
   currentPage = 1;
   sortColumn: string = 'lastname';
   sortDirection: string = 'asc';
