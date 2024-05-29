@@ -18,10 +18,10 @@ const routes: Routes = [
   { path: 'profile', component: ProfilComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersmanagerComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'lanceraap', component: LanceraapComponent },
-  { path: 'postuler', component: PostulerComponent },
+  { path: 'lanceraap', component: LanceraapComponent, canActivate: [AuthGuard]},
+  { path: 'postuler', component: PostulerComponent},
   { path: 'exemple-aap-postuler', component:ExempleAapPostulerComponent },
-  { path: 'usersmanager', component:UsersmanagerComponent},
+  { path: 'usersmanager', component:UsersmanagerComponent, canActivate: [AuthGuard]},
 
 
 

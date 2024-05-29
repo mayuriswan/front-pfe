@@ -2,7 +2,7 @@
   <a class="logo" href="#"><img src="assets/Images/iresenlogo.png" alt="Iresen Inc Logo"></a>
   <nav class="nav-menu">
     <a class="nav-link" [routerLink]="['/']">Accueil</a>
-    <a class="nav-link" href="#">Agence de moyens</a>
+    <a class="nav-link" href="/postuler">Agence de moyens</a>
     <a class="nav-link" href="#">Thématiques</a>
     <a class="nav-link" href="#">Mutualisation des services</a>
     <div class="dropdown">
@@ -15,6 +15,6 @@
     </div>
   </nav>
   <div class="button-container">
-    <button *ngIf="isAccueilPage()" type="button" class="auth-button" (click)="navigateToLogin()">Se connecter</button>
+    <button *ngIf="!isLoginPage()" type="button" class="auth-button" (click)="navigateToLogin()">Se connecter</button>
   </div>
 </header>
