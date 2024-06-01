@@ -1,0 +1,55 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #2e4ab7, #2880e4); /* Ajustez les couleurs selon votre image */
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    color: #2e4ab7;
+    margin-bottom: 40px;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+.theme {
+    display: inline-block;
+    margin: 20px;
+    width: 180px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.theme:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.theme i {
+    font-size: 48px;
+    background: linear-gradient(to bottom, #2e4ab7, #2880e4);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.theme p {
+    color: #243c9f;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase;
+}

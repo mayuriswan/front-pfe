@@ -13,8 +13,8 @@ export class HeroComponent implements OnInit, OnDestroy {
       image: '/assets/Images/hero.jpg'
     },
     {
-      title: 'Titre 2',
-      description: 'kffklfkg',
+      title: 'Institut de Recherche en Energie Solaire et Energies Nouvelles',
+      description: 'Nos projets de recherche collaboratifs à l’échelle nationale et internationale nous permettent non seulement de favoriser et faciliter la collaboration entre les chercheurs et les experts mais aussi «d’innover ensemble pour contribuer à la lutte contre le changement climatique et la précarité énergétique en Afrique.»',
       image: '/assets/Images/hero.jpg'
     }
   ];

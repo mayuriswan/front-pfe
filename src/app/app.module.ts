@@ -43,6 +43,9 @@ import { ExempleAapComponent } from './components/exemple-aap/exemple-aap.compon
 import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exemple-aap-postuler.component';
 import { FormService } from './components/form-create-aap/form.service';
 import { CountryService } from './components/form-create-aap/country.service.';
+import { ThemesComponent } from './components/themes/themes.component';
+import { AgencemoyenComponent } from './components/agencemoyen/agencemoyen.component';
+import { CompoThematiquesComponent } from './components/compo-thematiques/compo-thematiques.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +73,10 @@ import { CountryService } from './components/form-create-aap/country.service.';
     PostulerComponent,
     HeaderInfoComponent,
     ExempleAapComponent,
-    ExempleAapPostulerComponent
+    ExempleAapPostulerComponent,
+    ThemesComponent,
+    AgencemoyenComponent,
+    CompoThematiquesComponent
     
   ],
   imports: [
@@ -92,4 +98,3 @@ import { CountryService } from './components/form-create-aap/country.service.';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-

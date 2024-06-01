@@ -1,0 +1,11 @@
+<div class="container text-center my-5">
+    <h1>THÉMATIQUES</h1>
+    <div class="row mt-4">
+        <div class="col-md-4 col-lg-2 mb-4" *ngFor="let theme of themes">
+            <div class="theme">
+                <i [class]="theme.icon"></i>
+                <p>{{ theme.label }}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="agency-stats">
+    <img src="/assets/Images/chargement.gif" alt="Logo" class="agency-logo">
+    <h1>IRESEN - AGENCE DE MOYENS EN CHIFFRES</h1>
+    <div class="stats-container">
+      <div *ngFor="let stat of stats" class="stat-item">
+        <h2>{{ stat.number }}</h2>
+        <p>{{ stat.title }}</p>
+        <span>{{ stat.description }}</span>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,90 @@
+.agency-stats {
+    background: linear-gradient(to bottom, #1a2a6c, #257cda);
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+  }
+  
+  .agency-logo {
+    width: 100px; /* Ajustez cette valeur selon vos besoins */
+    position: absolute;
+    top: 50px; /* Ajustez cette valeur selon vos besoins */
+    left: 30px; /* Ajustez cette valeur selon vos besoins */
+  }
+  
+  .agency-stats h1 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .stats-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .stat-item {
+    background: #fff;
+    color: #1a2a6c;
+    border-radius: 15px;
+    padding: 20px;
+    width: 220px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .stat-item:before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: all 0.5s;
+    z-index: 0;
+  }
+  
+  .stat-item:hover:before {
+    top: -70%;
+    left: -70%;
+    width: 220%;
+    height: 220%;
+  }
+  
+  .stat-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stat-item h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .stat-item p {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .stat-item span {
+    font-size: 0.9em;
+    color: #666;
+    position: relative;
+    z-index: 1;
+  }
+  
