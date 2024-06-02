@@ -7,7 +7,7 @@ import { ProjectCall } from '../models/project-call.model';
   providedIn: 'root'
 })
 export class ProjectCallService {
-  private apiUrl = 'http://localhost:5000/api/ProjectCalls';
+  private apiUrl = 'http://localhost:7171/api/ProjectCalls';
 
   constructor(private http: HttpClient) { }
 

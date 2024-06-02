@@ -1,0 +1,133 @@
+.nav-pills .nav-link.active {
+    background-color: #28a745;
+  }
+  
+  .nav-pills .nav-link {
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: white;
+    background-color: #6c757d;
+  }
+  
+  .nav-pills .nav-link:not(.active):hover {
+    background-color: #5a6268;
+  }
+  .stepper-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .btn {
+    margin-right: 0.5rem;
+  }
+  
+  .input-group-append .btn {
+    margin-left: -1px;
+  }
+  
+  .mt-2 {
+    margin-top: 1rem;
+  }
+  
+  .mt-3 {
+    margin-top: 1.5rem;
+  }
+  
+  .mt-4 {
+    margin-top: 2rem;
+  }
+  
+  .mb-1 {
+    margin-bottom: 0.5rem;
+  }
+  
+  .mb-2 {
+    margin-bottom: 1rem;
+  }
+  
+  .mb-3 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .mr-2 {
+    margin-right: 0.5rem;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .step.active {
+    background-color: linear-gradient(to bottom, #257cda, #292E95);
+    color: white;
+    font-weight: bold;
+  }
+  
+  .step:last-child {
+    margin-right: 0;
+  }
+  
+  .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .btn {
+    margin-right: 5px;
+  }
+  /* Styles pour les boutons .btn-primary */
+.btn-primary {
+    background: linear-gradient(to bottom, #257cda, #292E95);
+    color: white;
+    margin-right: 5px; /* Ajoute un espacement entre les boutons */
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(to bottom, #292E95, #257cda);
+  }
+  
+  /* Styles généraux pour les boutons */
+  .btn {
+    margin: 5px 5px 5px 0; /* Ajoute un espacement entre les boutons */
+  }
+  
+  .btn-add {
+    background-color: #257cda;
+    color: white;
+  }
+  
+  .btn-add:hover {
+    background-color: #1a5ca1;
+  }

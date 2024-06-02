@@ -1,4 +1,10 @@
 <form [formGroup]="customForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="Formulaire_evaluation">Formulaire d'évaluation</label>
+    <select formControlName="Formulaire_evaluation" class="form-control">
+      <option *ngFor="let form of evaluationForms" [value]="form.id">{{ form.nom }}</option>
+    </select>
+  </div>
   <div class="row justify-content-center">
     <div class="col-lg-10">
       <div class="card mt-4">
@@ -145,7 +151,9 @@
                 <label class="col-sm-4 col-form-label small-label" for="Formulaire_evaluation">Formulaire d'évaluation</label>
                 <div class="col-sm-8">
                   <div class="input-group">
-                    <input type="text" class="form-control small-input" id="Formulaire_evaluation" formControlName="Formulaire_evaluation" readonly>
+                    <select class="form-control small-input" id="Formulaire_evaluation" formControlName="Formulaire_evaluation">
+                      <option *ngFor="let form of evaluationForms" [value]="form.id">{{ form.nom }}</option>
+                    </select>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary small-btn" type="button" (click)="openModal()">Créer nouveau formulaire</button>
                     </div>
@@ -232,23 +240,4 @@
     </div>
   </div>
 </form>
-
-<div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': modalOpen}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Sélectionner un formulaire d'évaluation</h5>
-        <button type="button" class="close" (click)="closeModal()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <ul>
-          <li *ngFor="let form of evaluationForms">
-            <a href="#" (click)="selectForm(form)">{{ form.name }}</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+<app-modal></app-modal>

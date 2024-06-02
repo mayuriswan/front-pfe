@@ -1,8 +1,11 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown'; // Ajout du module
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -41,11 +44,14 @@ import { PostulerComponent } from './pages/postuler/postuler.component';
 import { HeaderInfoComponent } from './components/header-info/header-info.component';
 import { ExempleAapComponent } from './components/exemple-aap/exemple-aap.component';
 import { ExempleAapPostulerComponent } from './pages/exemple-aap-postuler/exemple-aap-postuler.component';
-import { FormService } from './components/form-create-aap/form.service';
+import { FormService } from './services/services/form.service';
 import { CountryService } from './components/form-create-aap/country.service.';
 import { ThemesComponent } from './components/themes/themes.component';
 import { AgencemoyenComponent } from './components/agencemoyen/agencemoyen.component';
 import { CompoThematiquesComponent } from './components/compo-thematiques/compo-thematiques.component';
+import { FormulaireComponent } from './components/formulaire/formulaire.component';
+import { ModalComponent } from './components/modal/modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +82,9 @@ import { CompoThematiquesComponent } from './components/compo-thematiques/compo-
     ExempleAapPostulerComponent,
     ThemesComponent,
     AgencemoyenComponent,
-    CompoThematiquesComponent
+    CompoThematiquesComponent,
+    FormulaireComponent,
+    ModalComponent
     
   ],
   imports: [
@@ -87,8 +95,13 @@ import { CompoThematiquesComponent } from './components/compo-thematiques/compo-
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgMultiSelectDropDownModule.forRoot() // Initialisation du module
+    NgMultiSelectDropDownModule.forRoot(),
+    MatStepperModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule 
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     AuthService,
     AapApiService,
