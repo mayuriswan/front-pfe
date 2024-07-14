@@ -1,243 +1,407 @@
-<form [formGroup]="customForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="Formulaire_evaluation">Formulaire d'évaluation</label>
-    <select formControlName="Formulaire_evaluation" class="form-control">
-      <option *ngFor="let form of evaluationForms" [value]="form.id">{{ form.nom }}</option>
-    </select>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-lg-10">
-      <div class="card mt-4">
-        <div class="card-header text-white">
-          Lancer un Appel à projet
+<div class="container mt-5">
+  <mat-card>
+    <mat-card-title class="text-center">Lancer un offre Appel à projet</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Name -->
+            <mat-form-field appearance="fill">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- Category -->
+            <mat-form-field appearance="fill">
+              <mat-label>Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-        <div class="card-body">
-          <div class="info-bar">
-            <div class="info-item">
-              <i class="fas fa-file-alt"></i>
-              <span>0 Soumissions</span>
-            </div>
-            <div class="info-item">
-              <i class="fas fa-folder"></i>
-              <span>0 Documents</span>
-            </div>
-            <div class="info-item">
-              <i class="fas fa-globe"></i>
-              <span class="status non-publie">Non publié</span>
-            </div>
+
+        <!-- Description -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Responsible Person -->
+            <mat-form-field appearance="fill">
+              <mat-label>Responsible Person</mat-label>
+              <mat-select formControlName="responsiblePerson">
+                <mat-option *ngFor="let user of allUsers" [value]="user.id">
+                  {{ user.firstname }} {{ user.lastname }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-          
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label small-label" for="Nom">Nom</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control small-input" id="Nom" formControlName="Nom">
-            </div>
+          <div class="col-md-6">
+            <!-- Hosting Institution -->
+            <mat-form-field appearance="fill">
+              <mat-label>Hosting Institution</mat-label>
+              <mat-select formControlName="hostingInstitution">
+                <mat-option *ngFor="let institution of institutions" [value]="institution.id">
+                  {{ institution.name }}
+                  <button mat-icon-button color="warn"
+                    (click)="removeInstitution(institution.id, $event); $event.stopPropagation();">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </mat-option>
+                <mat-divider></mat-divider>
+                <mat-option (click)="openAddInstitutionModal()">Add new Hosting Institution</mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
-          <div class="form-group row">
-            <label class="col-sm-2 col-form-label small-label" for="Description">Description</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control small-input" id="Description" formControlName="Description">
-            </div>
-          </div>
-          
-          <div class="my-2"></div>
-          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="responsable">Responsable</label>
-                <div class="col-sm-8">
-                  <select class="form-control small-input" id="responsable" formControlName="responsable">
-                    <option value="Administrateur">Administrateur</option>
-                    <option value="Evaluateur">Évaluateur</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Category">Catégorie</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control small-input" id="Category" formControlName="Category">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="institut_hote">Institut hôte</label>
-                <div class="col-sm-8">
-                  <select class="form-control small-input" id="institut_hote" formControlName="institut_hote">
-                    <option value="IRESEN">IRESEN</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="budget">Budget</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control small-input" id="budget" formControlName="budget" step="0.01">
-                  <div *ngIf="customForm.get('budget')?.invalid && (customForm.get('budget')?.touched || customForm.get('budget')?.dirty)" class="text-danger">
-                    Le budget doit être un nombre non négatif.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="duree_minimale">Durée minimale (en semestre)</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control small-input" id="duree_minimale" formControlName="duree_minimale" min="1">
-                  <div *ngIf="customForm.get('duree_minimale')?.invalid && (customForm.get('duree_minimale')?.touched || customForm.get('duree_minimale')?.dirty)" class="text-danger">
-                    La durée minimale doit être au moins 1 semestre.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="duree_maximale">Durée maximale (en semestre)</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control small-input" id="duree_maximale" formControlName="duree_maximale" min="1">
-                  <div *ngIf="customForm.get('duree_maximale')?.invalid && (customForm.get('duree_maximale')?.touched || customForm.get('duree_maximale')?.dirty)" class="text-danger">
-                    La durée maximale doit être au moins 1 semestre.
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Task_type">Type de tâche</label>
-                <div class="col-sm-8">
-                  <select class="form-control small-input" id="Task_type" formControlName="Task_type">
-                    <option value=" "></option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Pays_autorises">Pays autorisés</label>
-                <div class="col-sm-8">
-                  <ng-multiselect-dropdown
-                    [placeholder]="'  '"
-                    [data]="countries"
-                    [settings]="dropdownSettings"
-                    formControlName="Pays_autorises">
-                  </ng-multiselect-dropdown>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Budget_separe">Budget séparé</label>
-                <div class="col-sm-8">
-                  <input type="checkbox" class="small-input" id="Budget_separe" formControlName="Budget_separe">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Post_budget">Post Budget</label>
-                <div class="col-sm-8">
-                  <select class="form-control small-input" id="Post_budget" formControlName="Post_budget">
-                    <option value=" "></option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Date_publication">Date de publication</label>
-                <div class="col-sm-8">
-                  <input type="date" class="form-control small-input" id="Date_publication" formControlName="Date_publication">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Date_cloture">Date de clôture</label>
-                <div class="col-sm-8">
-                  <input type="date" class="form-control small-input" id="Date_cloture" formControlName="Date_cloture">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Soumission_acceptee">Soumission acceptée</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control small-input" id="Soumission_acceptee" formControlName="Soumission_acceptee" readonly>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="Formulaire_evaluation">Formulaire d'évaluation</label>
-                <div class="col-sm-8">
-                  <div class="input-group">
-                    <select class="form-control small-input" id="Formulaire_evaluation" formControlName="Formulaire_evaluation">
-                      <option *ngFor="let form of evaluationForms" [value]="form.id">{{ form.nom }}</option>
-                    </select>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary small-btn" type="button" (click)="openModal()">Créer nouveau formulaire</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label class="col-sm-4 col-form-label small-label" for="exampleFormControlFile1">Documents</label>
-                <div class="col-sm-8">
-                  <input type="file" class="form-control-file small-input" id="exampleFormControlFile1" formControlName="Documents">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-sm-12 text-center">
-              <button type="submit" class="btn btn-primary mx-2 small-btn">Enregistrer</button>
-              <button type="reset" class="btn btn-secondary mx-2 small-btn">Annuler</button>
-            </div>
-          </div>
-          
-          <div class="tabs">
-            <ul class="tab-links">
-              <li [ngClass]="{'active': activeTab === 'evaluation'}">
-                <a href="#" (click)="setActiveTab($event, 'evaluation')">Évaluation</a>
-              </li>
-              <li [ngClass]="{'active': activeTab === 'evaluateurs'}">
-                <a href="#" (click)="setActiveTab($event, 'evaluateurs')">Évaluateurs</a>
-              </li>
-            </ul>
-            <div class="tab-content">
-              <div id="evaluation" class="tab" [ngClass]="{'active': activeTab === 'evaluation'}">
-                <table class="styled-table">
-                  <thead>
-                    <tr>
-                      <th>Titre</th>
-                      <th>Base de notation (0-100)</th>
-                    </tr>
-                  </thead>
-                  <tbody formArrayName="criteria">
-                    <tr *ngFor="let criterion of criteria.controls; let i = index" [formGroupName]="i">
-                      <td>
-                        <input type="text" class="form-control" formControlName="title" placeholder=" ">
-                      </td>
-                      <td>
-                        <input type="number" class="form-control" formControlName="score" min="0" max="100" placeholder=" ">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><a href="#" (click)="addCriterion($event)" class="add-line">Ajouter une ligne</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div id="evaluateurs" class="tab" [ngClass]="{'active': activeTab === 'evaluateurs'}">
-                <table class="styled-table">
-                  <thead>
-                    <tr>
-                      <th>Évaluateur</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <select class="form-control">
-                          <option value="1">Évaluateur 1</option>
-                          <option value="2">Évaluateur 2</option>
-                        </select>
-                      </td>
-                      <td><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><a href="#" class="add-line">Ajouter un évaluateur</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          
         </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Budget -->
+            <mat-form-field appearance="fill">
+              <mat-label>Budget</mat-label>
+              <input matInput type="number" formControlName="budget" step="10000">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- Post Budget -->
+            <mat-form-field appearance="fill">
+              <mat-label>Post Budget</mat-label>
+              <input matInput type="number" formControlName="postBudget" step="10000">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Minimum Duration -->
+            <mat-form-field appearance="fill">
+              <mat-label>Minimum Duration (semesters)</mat-label>
+              <input matInput type="number" formControlName="minDuration">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- Maximum Duration -->
+            <mat-form-field appearance="fill">
+              <mat-label>Maximum Duration (semesters)</mat-label>
+              <input matInput type="number" formControlName="maxDuration">
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Type of Task -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Type of Task</mat-label>
+          <mat-select formControlName="taskType">
+            <mat-option *ngFor="let taskType of taskTypes" [value]="taskType.id">
+              {{ taskType.name }}
+              <button mat-icon-button color="warn"
+                (click)="removeTaskType(taskType.id, $event); $event.stopPropagation();">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-option>
+            <mat-divider></mat-divider>
+            <mat-option (click)="openAddTaskTypeModal()">Add new Task types</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Authorized Countries -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Authorized Countries</mat-label>
+          <mat-select formControlName="authorizedCountries" multiple>
+            <div mat-option>
+              <mat-checkbox [checked]="allCountriesSelected" (change)="toggleSelectAllCountries()">Select
+                All</mat-checkbox>
+            </div>
+            <mat-form-field style="width: 100%;">
+              <input matInput placeholder="Search country" (input)="onSearchCountry($event)">
+            </mat-form-field>
+            <mat-option *ngFor="let country of filteredCountries" [value]="country">
+              {{ country }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Separate Budget -->
+        <mat-checkbox formControlName="separateBudget">Separate Budget</mat-checkbox>
+
+        <div class="row">
+          <div class="col-md-6">
+            <!-- Publication Date -->
+            <mat-form-field appearance="fill">
+              <mat-label>Publication Date</mat-label>
+              <input matInput [matDatepicker]="publicationDatePicker" formControlName="publicationDate">
+              <mat-datepicker-toggle matSuffix [for]="publicationDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #publicationDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <!-- Closing Date -->
+            <mat-form-field appearance="fill">
+              <mat-label>Closing Date</mat-label>
+              <input matInput [matDatepicker]="closingDatePicker" formControlName="closingDate">
+              <mat-datepicker-toggle matSuffix [for]="closingDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #closingDatePicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Accepted Submissions -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Accepted Submissions</mat-label>
+          <input matInput type="number" formControlName="acceptedSubmissions">
+        </mat-form-field>
+
+        <!-- Evaluation Form -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Evaluation Form</mat-label>
+          <mat-select formControlName="evaluationForm">
+            <mat-option *ngFor="let form of evaluationForms" [value]="form.id">
+              <div class="form-option">
+                <span>{{ form.name }}</span>
+                <button mat-icon-button color="primary" (click)="openEvaluationForm(form, $event)">
+                  <mat-icon>open_in_new</mat-icon>
+                </button>
+              </div>
+            </mat-option>
+            <mat-divider></mat-divider>
+            <mat-option (click)="openAddEvaluationFormModal()">Create new Evaluation Form</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Evaluations -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Evaluations</mat-label>
+          <mat-select formControlName="evaluation">
+            <mat-option *ngFor="let eval of evaluations" [value]="eval.id">
+              <div class="form-option">
+                <span>{{ eval.title }}</span>
+                <button mat-icon-button color="primary" (click)="openEvaluation(eval, $event)">
+                  <mat-icon>open_in_new</mat-icon>
+                </button>
+              </div>
+            </mat-option>
+            <mat-divider></mat-divider>
+            <mat-option (click)="openAddNewEvaluationModal()">Create new Evaluation</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Documents and Photos -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="file-upload">
+              <label for="documents">Document</label>
+              <input type="file" id="document" (change)="onFileSelected($event, 'document')">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="file-upload">
+              <label for="photos">Photo</label>
+              <input type="file" id="photo" (change)="onFileSelected($event, 'photo')">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+            <!-- Evaluators Button -->
+            <button mat-raised-button color="primary" type="button" (click)="openEvaluatorsModal()">Select
+              Evaluators</button>
+          </div>
+        </div>
+
+        <!-- Submit and Draft Buttons -->
+        <mat-card-actions class="text-center">
+          <button mat-raised-button color="primary" type="submit" [disabled]="projectForm.invalid">Submit</button>
+          <button mat-raised-button color="accent" type="button" (click)="onSaveAsDraft()">Save as Draft</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Add Hosting Institution Modal -->
+<div class="modal" [class.fade]="!isModalOpen" [class.show]="isModalOpen"
+  [ngStyle]="{'display': isModalOpen ? 'block' : 'none'}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Hosting Institution</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeAddInstitutionModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newInstitutionForm" (ngSubmit)="onAddInstitution()">
+          <div class="form-group">
+            <label for="institutionName">Institution Name</label>
+            <input type="text" class="form-control" id="institutionName" formControlName="name">
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="newInstitutionForm.invalid">Add Institution</button>
+        </form>
       </div>
     </div>
   </div>
-</form>
-<app-modal></app-modal>
+</div>
+
+<!-- Add Task Type Modal -->
+<div class="modal" [class.fade]="!TaskTypeModalOpen" [class.show]="TaskTypeModalOpen"
+  [ngStyle]="{'display': TaskTypeModalOpen ? 'block' : 'none'}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Task Type</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeAddTaskTypeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newTasktypesForm" (ngSubmit)="onAddTasktypes()">
+          <div class="form-group">
+            <label for="tasktypeName">Task Type Name</label>
+            <input type="text" class="form-control" id="tasktypeName" formControlName="name">
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="newTasktypesForm.invalid">Add Task Type</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create New Evaluation Form Modal -->
+<div class="modal" [class.fade]="!isEvaluationFormModalOpen" [class.show]="isEvaluationFormModalOpen"
+  [ngStyle]="{'display': isEvaluationFormModalOpen ? 'block' : 'none'}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Evaluation Form</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeAddEvaluationFormModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newEvaluationForm" (ngSubmit)="onAddEvaluationForm()">
+          <div class="form-group">
+            <label for="evaluationFormName">Evaluation Form Name</label>
+            <input type="text" class="form-control" id="evaluationFormName" formControlName="name">
+          </div>
+          <div formArrayName="steps">
+            <div *ngFor="let step of formSteps.controls; let i=index" [formGroupName]="i">
+              <div class="form-group">
+                <label>Step Name</label>
+                <input type="text" class="form-control" formControlName="name">
+              </div>
+              <div formArrayName="fields">
+                <div *ngFor="let field of getStepFields(i).controls; let j=index" [formGroupName]="j">
+                  <div class="form-group">
+                    <label>Field Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+                  <div class="form-group">
+                    <label>Field Type</label>
+                    <select class="form-control" formControlName="type">
+                      <option value="text">Text</option>
+                      <option value="date">Date</option>
+                      <option value="number">Number</option>
+                      <option value="file">File Upload</option>
+                      <option value="select">Multiple Selection</option>
+                      <option value="radio">Multiple-Choice Multiple Selection</option>
+                    </select>
+                  </div>
+                  <div class="form-group"
+                    *ngIf="field.get('type')?.value === 'select' || field.get('type')?.value === 'radio'">
+                    <label>Choices (comma-separated)</label>
+                    <input type="text" class="form-control" formControlName="options">
+                  </div>
+                  <button type="button" class="btn btn-danger" (click)="removeField(i, j)">Remove Field</button>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary" (click)="addField(i)">Add Field</button>
+              <button type="button" class="btn btn-danger" (click)="removeStep(i)">Remove Step</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="addStep()">Add Step</button>
+          <button type="submit" class="btn btn-success" [disabled]="newEvaluationForm.invalid">Create Evaluation
+            Form</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create New Evaluation Modal -->
+<div class="modal" [class.fade]="!isNewEvaluationFormModalOpen" [class.show]="isNewEvaluationFormModalOpen"
+  [ngStyle]="{'display': isNewEvaluationFormModalOpen ? 'block' : 'none'}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create New Evaluation</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeNewEvaluationFormModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newEvalForm" (ngSubmit)="onAddNewEvaluation()">
+          <div class="form-group">
+            <label for="evaluationTitle">Evaluation Title</label>
+            <input type="text" class="form-control" id="evaluationTitle" formControlName="title">
+          </div>
+          <div class="form-group">
+            <label for="baseDeNotation">Base de Notation</label>
+            <input type="number" class="form-control" id="baseDeNotation" formControlName="baseDeNotation">
+          </div>
+          <div formArrayName="criteria">
+            <div *ngFor="let criterion of criteria.controls; let i=index" [formGroupName]="i" class="form-row">
+              <div class="form-group col-md-6">
+                <label for="criterion">Criterion</label>
+                <input type="text" class="form-control" formControlName="criterion">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="note">Note</label>
+                <input type="number" class="form-control" formControlName="note">
+              </div>
+              <div class="form-group col-md-2">
+                <button type="button" class="btn btn-danger" (click)="removeCriterion(i)">Remove</button>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="addCriterion()">Add Criterion</button>
+          <button type="submit" class="btn btn-success" [disabled]="newEvalForm.invalid">Create Evaluation</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Evaluators Modal -->
+<div class="modal" [class.fade]="!isEvaluatorsModalOpen" [class.show]="isEvaluatorsModalOpen"
+  [ngStyle]="{'display': isEvaluatorsModalOpen ? 'block' : 'none'}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Select Evaluators</h5>
+        <button type="button" class="close" aria-label="Close" (click)="closeEvaluatorsModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div *ngFor="let evaluator of allEvaluators">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [id]="'evaluator-' + evaluator.id"
+              [(ngModel)]="evaluator.selected">
+            <label class="form-check-label" [for]="'evaluator-' + evaluator.id">
+              {{ evaluator.firstname }} {{ evaluator.lastname }}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="saveSelectedEvaluators()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="closeEvaluatorsModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

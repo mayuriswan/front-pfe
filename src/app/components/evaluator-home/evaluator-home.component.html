@@ -1,0 +1,39 @@
+<div class="d-flex">
+    <app-sidebar></app-sidebar>
+    <div class="home-container flex-grow-1 p-3">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <h2>Projects</h2>
+                    <ul class="list-group">
+                        <li *ngFor="let project of projects" class="list-group-item" (click)="selectProject(project)"
+                            [class.active]="project === selectedProject">
+                            {{ project.name }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8" *ngIf="selectedProject">
+                    <h2>Submissions for {{ selectedProject.name }}</h2>
+                    <div *ngFor="let submission of submissions" class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ submission.user.firstname }} {{ submission.user.lastname }}</h5>
+                            <p class="card-text">Submission Date: {{ submission.submissionDate | date }}</p>
+                            <p class="card-text">Step Values:</p>
+                            <ul>
+                                <li *ngFor="let stepValue of submission.stepValues">
+                                    <strong>{{ stepValue.name }}</strong>
+                                    <ul>
+                                        <li *ngFor="let field of stepValue.fields">
+                                            {{ field.name }} ({{ field.type }}): {{ field.value }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <button class="btn btn-primary" (click)="evaluateSubmission(submission)">Evaluate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

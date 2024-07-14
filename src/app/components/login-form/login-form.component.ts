@@ -1,5 +1,5 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AapApiService } from 'src/app/services/aap-api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -18,10 +18,12 @@ export class LoginFormComponent implements AfterViewInit {
   signinPassword: string = '';
   emailError: boolean = false;
   emailErrorFade: boolean = false;
+  returnUrl: string = '';
 
   constructor(
     private elementRef: ElementRef,
     private router: Router,
+    private route: ActivatedRoute,
     private apiService: AapApiService,
     private authService: AuthService
   ) {}
@@ -38,6 +40,10 @@ export class LoginFormComponent implements AfterViewInit {
     signInButton.addEventListener('click', () => {
       container.classList.remove("right-panel-active");
     });
+
+    this.route.queryParams.subscribe(params => {
+      this.returnUrl = params['returnUrl'] || '/home';
+    });
   }
 
   onSubmitSignup() {
@@ -53,7 +59,7 @@ export class LoginFormComponent implements AfterViewInit {
     this.apiService.addUser(newUser).subscribe(
       response => {
         console.log('User created successfully', response);
-        this.router.navigateByUrl('/home');
+        this.authService.login(newUser.email, newUser.password, this.returnUrl);
       },
       error => {
         if (error === 'Email already exists') {
@@ -73,6 +79,6 @@ export class LoginFormComponent implements AfterViewInit {
   }
 
   onSubmitSignin() {
-    this.authService.login(this.signinEmail, this.signinPassword);
+    this.authService.login(this.signinEmail, this.signinPassword, this.returnUrl);
   }
 }

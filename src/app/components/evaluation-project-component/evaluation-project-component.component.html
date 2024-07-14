@@ -1,0 +1,85 @@
+<app-header-info></app-header-info>
+<app-navbar></app-navbar>
+<section class="hero" style="background-image: url('assets/Images/greenboostr.jpg');">
+    <div class="blue-overlay"></div>
+    <div class="overlay">
+        <h1 class="display-4 text-center text-white">{{ project?.name }}</h1>
+        <div class="caption-overlay text-center text-white">
+            <p class="lead">Lancement : {{ project?.publicationDate | date }}<br>Clôture : {{ project?.closingDate |
+                date }}</p>
+        </div>
+    </div>
+</section>
+<div *ngIf="form" class="container mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <h2>{{ form.name }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" [style.width.%]="getProgressPercentage()"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <div class="step-indicators">
+                <div *ngFor="let step of form.steps; let i = index" [class.active]="i === currentStepIndex"
+                    [class.completed]="i < currentStepIndex" (click)="goToStep(i)" class="step-indicator">
+                    Step {{i + 1}}
+                </div>
+            </div>
+            <form (ngSubmit)="onSubmit()">
+                <div *ngIf="form.steps && form.steps.length > 0">
+                    <h3>Step {{ currentStepIndex + 1 }}: {{ form.steps[currentStepIndex].name }}</h3>
+                    <div *ngFor="let field of form.steps[currentStepIndex].fields" class="mb-3">
+                        <div [ngSwitch]="field.type">
+                            <div *ngSwitchCase="'text'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <input type="text" class="form-control" [(ngModel)]="field.value" name="{{field.name}}">
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                            <div *ngSwitchCase="'date'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <input type="date" class="form-control" [(ngModel)]="field.value" name="{{field.name}}">
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                            <div *ngSwitchCase="'number'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <input type="number" class="form-control" [(ngModel)]="field.value"
+                                    name="{{field.name}}">
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                            <div *ngSwitchCase="'file'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <input type="file" class="form-control" name="{{field.name}}">
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                            <div *ngSwitchCase="'select'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <select multiple class="form-control" [(ngModel)]="field.value" name="{{field.name}}">
+                                    <option *ngFor="let option of getOptions(field.options ?? '')">{{ option }}</option>
+                                </select>
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                            <div *ngSwitchCase="'radio'" class="form-group">
+                                <label>{{ field.name }}</label>
+                                <div *ngFor="let option of getOptions(field.options ?? '')" class="form-check">
+                                    <input type="radio" [id]="option" [value]="option" class="form-check-input"
+                                        [(ngModel)]="field.value" name="{{field.name}}">
+                                    <label [for]="option" class="form-check-label">{{ option }}</label>
+                                </div>
+                                <div *ngIf="field.error" class="text-danger">{{ field.error }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-secondary" (click)="previousStep()"
+                        [disabled]="isFirstStep()">Previous</button>
+                    <button *ngIf="!isLastStep()" type="button" class="btn btn-primary"
+                        (click)="nextStep()">Next</button>
+                    <button *ngIf="isLastStep()" type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

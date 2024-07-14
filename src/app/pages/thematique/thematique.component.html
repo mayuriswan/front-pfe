@@ -1,0 +1,13 @@
+<!-- thematique.component.html -->
+<app-header-info></app-header-info>
+<app-navbar></app-navbar>
+<div class="thematiques-container">
+  <h1 class="page-title">THÉMATIQUES</h1>
+  <div class="thematiques-list">
+    <div *ngFor="let thematique of thematiques" class="thematique-item">
+      <i [class]="thematique.icon" aria-hidden="true"></i>
+      <h2>{{ thematique.title }}</h2>
+      <p>{{ thematique.description }}</p>
+    </div>
+  </div>
+</div>

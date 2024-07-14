@@ -17,4 +17,5 @@ export class ProjectCall {
     soumissionAcceptee?: number;
     formulaireEvaluation?: string;
     documents?: string;
+    evaluation?: [];
 }

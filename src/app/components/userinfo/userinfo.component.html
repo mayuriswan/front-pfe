@@ -1,49 +1,69 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="card shadow">
+<div class="container container-custom mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      <div class="card shadow card-custom">
         <br>
         <label for="profilePictureInput" class="profile-picture-wrapper">
           <img [src]="profilePicture || defaultProfilePicture" class="profile-picture" alt="Profile Picture">
-          <input type="file" #fileInput id="profilePictureInput" style="display: none" (change)="onFileSelected($event)">
+          <input type="file" #fileInput id="profilePictureInput" (change)="onFileSelected($event)">
         </label>
         <div class="card-body text-center">
-          <h5 class="card-title">Abdellah Benabdennour</h5>
-          <p class="card-text">Web Developer</p>
-          <p class="card-text">Location: Rabat, Maroc</p>
+          <h5 class="card-title card-title-custom">{{ user?.firstname }} {{ user?.lastname }}</h5>
+          <p class="card-text card-text-custom">{{ getRoleText(user?.role) }}</p>
+        </div>
+      </div>
+
+      <!-- Social Media Section -->
+      <div class="card shadow card-custom mt-4">
+        <div class="card-body">
+          <p class="card-text">
+            <i class="fab fa-whatsapp"></i>{{ user?.phone }}
+          </p>
+          <p class="card-text">
+            <i class="fab fa-twitter"></i> {{ user?.twitter }}
+          </p>
+          <p class="card-text">
+            <i class="fas fa-envelope"></i> {{ user?.gmail }}
+          </p>
+          <p class="card-text">
+            <i class="fab fa-facebook"></i> {{ user?.facebook }}
+          </p>
         </div>
       </div>
     </div>
+    
     <div class="col-md-8">
-      <div class="card shadow">
-        <div class="card-body">
-          <h5 class="card-title">Details</h5>
-          <p class="card-text">
-            <strong>Email:</strong> Benabdennourabdellah21@gmail.com<br>
-            <strong>Phone:</strong> +212669606184<br>
-          </p>
-        </div>
-      </div>
-
-      <div class="card mt-4 shadow">
-        <div class="card-body">
-          <h5 class="card-title">Projects</h5>
-          <p class="card-text">
-            <strong>Project 1:</strong> ...........<br>
-            <strong>Project 2:</strong> ...........<br>
-            <strong>Project 3:</strong> ...........<br>
-          </p>
-        </div>
-      </div>
-
-      <div class="card mt-4 shadow">
-        <div class="card-body">
-          <h5 class="card-title">Skills</h5>
-          <ul class="list-group rounded-list">
-            <li class="list-group-item rounded-pill">Skill 1</li>
-            <br>
-            <li class="list-group-item rounded-pill">Skill 2</li>
-          </ul>
+      <div class="card shadow card-custom">
+        <div class="card-body card-body-custom">
+          <h5 class="card-title card-title-custom">Informations</h5>
+          <div class="card-text card-text-custom">
+            <p class="contact-info"><strong>Firstname:</strong>
+              <span *ngIf="!editMode">{{ user?.firstname }}</span>
+              <input *ngIf="editMode" [(ngModel)]="user.firstname" class="form-control" />
+            </p>
+            <p class="contact-info"><strong>Lastname:</strong>
+              <span *ngIf="!editMode">{{ user?.lastname }}</span>
+              <input *ngIf="editMode" [(ngModel)]="user.lastname" class="form-control" />
+            </p>
+            <p class="contact-info"><strong>Email:</strong>
+              <span *ngIf="!editMode">{{ user?.email }}</span>
+              <input *ngIf="editMode" [(ngModel)]="user.email" class="form-control" />
+            </p>
+            <p class="contact-info"><strong>Password:</strong>
+              <span *ngIf="!editMode">*********</span>
+              <input *ngIf="editMode" [(ngModel)]="newPassword" type="password" class="form-control" placeholder="Enter new password" />
+            </p>
+            <p class="contact-info"><strong>Role:</strong> {{ getRoleText(user?.role) }}</p>
+            <p class="contact-info"><strong>Phone:</strong>
+              <span *ngIf="!editMode">{{ user?.phone }}</span>
+              <input *ngIf="editMode" [(ngModel)]="user.phone" class="form-control" />
+            </p>
+            <button *ngIf="!editMode" class="btn btn-custom" (click)="toggleEditMode()">Edit</button>
+            <div *ngIf="editMode">
+              <button class="btn btn-custom" (click)="saveChanges()">Save</button>
+              <button class="btn btn-secondary-custom" (click)="toggleEditMode()">Cancel</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

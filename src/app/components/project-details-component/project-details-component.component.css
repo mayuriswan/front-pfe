@@ -1,0 +1,37 @@
+.sidebar-container {
+    display: flex;
+    height: 100vh; 
+    overflow: hidden; 
+  }
+  
+  app-sidebar {
+    flex: 0 0 250px;
+  }
+  
+  app-form-create-aap {
+    flex: 1; 
+    overflow-y: auto; 
+}
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.align-items-center {
+  align-items: right;
+}
+
+.me-2 {
+  margin-right: 0.5rem;
+}
+
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.text-success {
+  color: #28a745 !important;
+}

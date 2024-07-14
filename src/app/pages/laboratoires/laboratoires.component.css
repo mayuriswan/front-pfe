@@ -1,0 +1,229 @@
+/* Navbar styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #f9fbfd;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+  }
+  
+  .logo img {
+    width: 100px;
+    height: auto;
+    filter: brightness(100%) invert(0);
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-link,
+  .auth-link {
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+  
+  .auth-link:hover,
+  .nav-link:hover {
+    text-decoration: none;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(37, 184, 237);
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after,
+  .auth-link:hover::after {
+    width: 100%;
+    left: 0;
+  }
+  
+  .auth-buttons {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .auth-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    position: relative;
+  }
+  
+  .dropdown-toggle::after {
+    content: ' ▼';
+    font-size: 0.8em;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    z-index: 1000;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    padding: 0.5rem 1rem;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    white-space: nowrap;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: #f6f6f7;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+  
+  /* Responsive adjustments */
+  @media screen and (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .nav-menu {
+      margin-top: 1rem;
+    }
+  
+    .nav-link,
+    .auth-link {
+      padding: 0.5rem;
+    }
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .auth-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 16px;
+    border-radius: 1000px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    color: #fff;
+    border: 1px solid #d1d6e2;
+    background-color: transparent;
+  }
+  
+  .auth-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);}
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .hero {
+        position: relative;
+        height: 80vh;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+    }
+    
+    
+    .caption-overlay {
+        margin-top: 20px;
+    }
+    
+    .content {
+        background-color: #f9f9f9;
+    }
+    
+    .content .text-box {
+        background-color: #e3f2fd;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .content h2 {
+        color: #292E95;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    .content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+    
+    .content .list-unstyled li {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .content .list-unstyled li i {
+        margin-right: 10px;
+    }
+    
+    .content .btn {
+        margin-top: 20px;
+        transition: background 0.3s;
+    }
+    .btn-primary {
+        background: linear-gradient(to bottom, #257cda, #292E95);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(to bottom, #292E95, #257cda);
+    }
+    
+    .btn-success {
+    background: linear-gradient(to bottom, #8dd2b1, #12803e);
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(to bottom, #12803e, #8dd2b1);
+}

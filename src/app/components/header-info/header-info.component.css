@@ -35,3 +35,20 @@ body {
 .info-item .fa-caret-down {
     margin-left: 5px;
 }
+.social-icon a:hover i {
+    color: blue;
+}
+ /* Styles for the "Meet us" link */
+ .meet-us-link {
+    color: white;
+    text-decoration: none;
+}
+
+.meet-us-link:hover {
+    color: rgb(228, 228, 236);
+    text-decoration: none;
+
+}
+.a{
+    color: rgb(253 253 253);
+}

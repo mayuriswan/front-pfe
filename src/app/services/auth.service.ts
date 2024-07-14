@@ -10,11 +10,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  login(email: string, password: string) {
+  login(email: string, password: string, returnUrl?: string) {
     return this.http.post<any>(this.authUrl, { email, password }).subscribe(
       response => {
         localStorage.setItem('currentUser', JSON.stringify(response));
-        this.router.navigate(['/home']); // Redirect to home after login
+        const redirectUrl = returnUrl || '/home';
+        this.router.navigate([redirectUrl]); // Redirect to returnUrl or home after login
       },
       error => {
         console.error('Login failed', error);

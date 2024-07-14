@@ -2,7 +2,7 @@ import { ComponentFixture } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormCreateAapComponent } from './form-create-aap.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CountryService } from '../form-create-aap/country.service.';
+import { CountriesService } from 'src/app/countries.service';
 import { TestBed, async } from '@angular/core/testing';
 
 describe('FormCreateAapComponent', () => {
@@ -15,7 +15,7 @@ describe('FormCreateAapComponent', () => {
         ReactiveFormsModule,
         HttpClientTestingModule // Ajout de HttpClientTestingModule
       ],
-      providers: [CountryService]
+      providers: [CountriesService]
     }).compileComponents();
   }));
 

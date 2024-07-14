@@ -1,0 +1,132 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fa;
+}
+
+.hero {
+    position: relative;
+    height: 60vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.blue-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(31, 58, 147, 0.8); /* Changer la couleur et l'opacité */
+    z-index: 1;
+}
+
+.overlay {
+    z-index: 2;
+}
+
+.display-4 {
+    font-size: 4rem;
+    font-weight: bold;
+    margin: 0;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.lead {
+    font-size: 1.5rem;
+    margin: 10px 0 0 0;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.lab-projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    border: 2px solid #1f3a93; /* Ajouter une bordure en pointillés */
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.university-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-top: 20px;
+}
+
+.project-details {
+    text-align: center;
+    padding: 20px;
+}
+
+.project-details h2 {
+    font-size: 1.5rem;
+    color: #1f3a93;
+    margin: 10px 0;
+}
+
+.project-details p {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+
+    .lead {
+        font-size: 1.2rem;
+    }
+}
+.content .text-box {
+    background-color: #e3f2fd;
+    border: 2px dashed #1b1386; /* Bordure vert foncé en pointillés */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

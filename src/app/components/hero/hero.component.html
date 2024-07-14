@@ -8,10 +8,12 @@
             <p class="hero-description">{{ slide.description }}</p>
           </div>
           <div class="button-container">
-            <a class="contact-sales-button" href="#">En Savoir Plus</a>
+            <a class="contact-sales-button" [routerLink]="['/exemple-aap', slide.id]">En Savoir Plus</a>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="arrow arrow-left" (click)="previousSlide()">&#8249;</div>
+  <div class="arrow arrow-right" (click)="nextSlide()">&#8250;</div>
 </section>
