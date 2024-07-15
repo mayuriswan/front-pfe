@@ -142,7 +142,7 @@ export class ShowUserComponent implements OnInit {
   getRoleName(role: number): string {
     switch (role) {
       case 0:
-        return 'utilisateur normale';
+        return 'Evaluateur';
       case 1:
         return 'admin';
       case 2:

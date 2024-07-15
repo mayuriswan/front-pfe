@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { AapApiService } from 'src/app/services/aap-api.service';
 
 @Component({
   selector: 'app-hero',
@@ -6,24 +7,51 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
   styleUrls: ['./hero.component.css']
 })
 export class HeroComponent implements OnInit, OnDestroy {
-  slides = [
-    {
-      title: 'Institut de Recherche en Energie Solaire et Energies Nouvelles',
-      description: 'Accompagnement et Développement de la Recherche Appliquée et de l’Innovation au service de la Transition Énergétique Nationale et Continentale.',
-      image: '/assets/Images/hero.jpg'
-    },
-    {
-      title: 'Institut de Recherche en Energie Solaire et Energies Nouvelles',
-      description: 'Nos projets de recherche collaboratifs à l’échelle nationale et internationale nous permettent non seulement de favoriser et faciliter la collaboration entre les chercheurs et les experts mais aussi «d’innover ensemble pour contribuer à la lutte contre le changement climatique et la précarité énergétique en Afrique.»',
-      image: '/assets/Images/hero.jpg'
-    }
-  ];
-
+  slides: any[] = [];
   currentSlide = 0;
   slideInterval: any;
 
+  constructor(private aapApiService: AapApiService) {}
+
   ngOnInit() {
+    this.fetchProjects();
     this.startSlideShow();
+  }
+
+  fetchProjects() {
+    this.aapApiService.getProjects().subscribe(
+      (projects: any[]) => {
+        this.slides = projects
+          .filter(project => project.isPublic)
+          .map(project => ({
+            id: project.id,
+            title: project.name,
+            description: project.description,
+            image: '/assets/Images/solaire1.jpg'
+          }));
+        
+        // Ensure at least one image is present
+        if (this.slides.length === 0) {
+          this.slides.push({
+            id: 'default',
+            title: 'Default Project',
+            description: 'This is a default project description',
+            image: '/assets/Images/solaire1.jpg'
+          });
+        }
+      },
+      (error) => {
+        console.error('Error fetching projects:', error);
+      }
+    );
+  }
+  
+  previousSlide() {
+    this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.slides.length;
   }
 
   ngOnDestroy() {

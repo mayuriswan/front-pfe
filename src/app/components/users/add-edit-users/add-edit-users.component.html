@@ -19,12 +19,12 @@
         </div>
         <div class="col-md-6">
             <label for="role" class="form-label fw-bold">Role</label>
-            <select class="form-select form-select-lg" [(ngModel)]="role" name="role" required>
+            <select class="form-select form-select-lg" [(ngModel)]="role" name="role" #roleSelect="ngModel" required>
                 <option value="">Select a role</option>
-                <option value="0">utilisateur normale</option>
+                <option value="0">Evaluateur</option>
                 <option value="1">admin</option>
                 <option value="2">superieur</option>
-            </select>
+              </select>
         </div>
     </div>
     <div class="row mb-3">
@@ -39,8 +39,8 @@
     <div class="row mb-3">
         <div class="col-12">
             <label for="password" class="form-label fw-bold">Password</label>
-            <input type="password" class="form-control form-control-lg" [(ngModel)]="password" name="password" minlength="8" required>
-            <small class="text-danger" *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched)">
+            <input type="password" class="form-control form-control-lg" [(ngModel)]="password" name="password" minlength="8">
+            <small class="text-danger" *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched) && password">
                 Password must be at least 8 characters long.
             </small>
         </div>
@@ -49,8 +49,8 @@
         <button (click)="addUser()" *ngIf="user['id']==0" class="btn btn-primary btn-lg" [disabled]="userForm.invalid">
             Ajouter
         </button>
-        <button (click)="updateUser()" *ngIf="user['id']!=0" class="btn btn-success btn-lg" [disabled]="userForm.invalid">
+        <button (click)="updateUser()" *ngIf="user['id']!=0" class="btn btn-success btn-lg" [disabled]="userForm.invalid || (!firstname || !lastname || !phone || !email || roleSelect.invalid)">
             Modifier
-        </button>
+          </button>
     </div>
 </form>

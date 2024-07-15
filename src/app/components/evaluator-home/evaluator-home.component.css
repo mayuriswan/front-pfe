@@ -1,0 +1,14 @@
+.sidebar-container {
+    display: flex;
+    height: 100vh; 
+    overflow: hidden; 
+  }
+  
+  app-sidebar {
+    flex: 0 0 250px;
+  }
+  
+  app-form-create-aap {
+    flex: 1; 
+    overflow-y: auto; 
+}

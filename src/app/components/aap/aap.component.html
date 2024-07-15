@@ -1,56 +1,59 @@
 <div class="home-container">
-    <!-- Search bar at the top of the page with a small gap -->
-    <h2>Appels a projet</h2>
-    <div class="search-bar">
-        <input type="text" placeholder="Search..." class="search-input">
-        <!-- SVG icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search search-icon" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>
+  <h2>Appels a projet</h2>
+  <div class="search-bar">
+    <input type="text" placeholder="Search..." class="search-input" [(ngModel)]="searchTerm">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search search-icon"
+      viewBox="0 0 16 16">
+      <path
+        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+    </svg>
+  </div>
+
+  <button class="creer-button">Ajouter</button>
+
+  <div class="sections-container">
+    <div class="section">
+      <h3>Ferme</h3>
+      <ng-container *ngFor="let project of filteredProjects">
+        <div class="card" (click)="onProjectClick(project)" *ngIf="!project.isPublic">
+          <h4>{{ project.name }}</h4>
+          <p>Responsable: {{ project.responsiblePerson?.firstname }} {{ project.responsiblePerson?.lastname }}</p>
+        </div>
+      </ng-container>
     </div>
 
-    <!-- Button named "creer" -->
-    <button class="creer-button">Ajouter</button>
-
-    <!-- Three sections divided vertically -->
-    <div class="sections-container">
-        <div class="section">
-            <h3>Ferme</h3>
-            <!-- Cards for "Ferme" section -->
-            <div class="card">
-                <h4>Titre 1</h4>
-                <p>Semi Titre 1</p>
-            </div>
-            <div class="card">
-                <h4>Titre 2</h4>
-                <p>Semi Titre 2</p>
-            </div>
+    <div class="section">
+      <h3>Brouillon</h3>
+      <ng-container *ngFor="let project of filteredProjects">
+        <div class="card" (click)="onProjectClick(project)" *ngIf="project.isDraft">
+          <h4>{{ project.name }}</h4>
+          <p>Responsable: {{ project.responsiblePerson?.firstname }} {{ project.responsiblePerson?.lastname }}</p>
         </div>
-        <div class="section">
-            <h3>Brouillon</h3>
-            <!-- Cards for "Brouillon" section -->
-            <div class="card">
-                <h4>Titre 3</h4>
-                <p>Semi Titre 3</p>
-            </div>
-            <div class="card">
-                <h4>Titre 4</h4>
-                <p>Semi Titre 4</p>
-            </div>
-        </div>
-        <div class="section">
-            <h3>En Cours</h3>
-            <!-- Cards for "En Cours" section -->
-            <div class="card">
-                <h4>Titre 5</h4>
-                <p>Semi Titre 5</p>
-                <app-circular-progress-bar [progress]="1" [total]="6"></app-circular-progress-bar>
-            </div>
-            <div class="card">
-                <h4>Titre 6</h4>
-                <p>Semi Titre 6</p>
-                <app-circular-progress-bar [progress]="8" [total]="8"></app-circular-progress-bar>
-            </div>
-        </div>
+      </ng-container>
     </div>
+
+    <div class="section">
+      <h3>En Cours</h3>
+      <ng-container *ngFor="let project of filteredProjects">
+        <div class="card" (click)="onProjectClick(project)" *ngIf="project.isPublic">
+          <h4>{{ project.name }}</h4>
+          <p>Responsable: {{ project.responsiblePerson?.firstname }} {{ project.responsiblePerson?.lastname }}</p>
+          <app-circular-progress-bar [progress]="project.nombreSubmissions"
+            [total]="project.acceptedSubmissions"></app-circular-progress-bar>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="project-details" *ngIf="selectedProject">
+    <div class="card">
+      <h2>{{ selectedProject.name }}</h2>
+      <p><strong>Description:</strong> {{ selectedProject.description }}</p>
+      <p><strong>Category:</strong> {{ selectedProject.category }}</p>
+      <p><strong>Budget:</strong> {{ selectedProject.budget }} DH</p>
+      <p><strong>Duration:</strong> {{ selectedProject.minDuration }} - {{ selectedProject.maxDuration }} semester</p>
+      <button (click)="viewProjectDetails(selectedProject.id)">View Details</button>
+      <button (click)="closeDetails()">Close</button>
+    </div>
+  </div>
 </div>

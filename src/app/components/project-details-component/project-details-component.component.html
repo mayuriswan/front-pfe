@@ -1,0 +1,136 @@
+<div class="d-flex">
+    <app-sidebar></app-sidebar>
+    <div class="home-container flex-grow-1 p-3">
+        <div class="card mt-5">
+            <div class="card-header text-center">
+                {{ project?.name }}
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-file-alt fa-lg me-2"></i>
+                        <span>{{ project?.nombreSubmissions || 0 }} Soumissions</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-folder fa-lg me-2"></i>
+                        <span>{{ project.nombreSumbissions || 0 }} Documents</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-globe fa-lg me-2"></i>
+                        <span [ngClass]="{'text-danger': !project?.isPublic, 'text-success': project?.isPublic}">
+                            {{ project?.isPublic ? 'Publié' : 'Non publié' }}
+                        </span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="projectName">Name</label>
+                        <input type="text" id="projectName" class="form-control" [value]="project?.name" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="projectCategory">Category</label>
+                        <input type="text" id="projectCategory" class="form-control" [value]="project?.category"
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="projectDescription">Description</label>
+                    <textarea id="projectDescription" class="form-control" rows="3" [value]="project?.description"
+                        readonly></textarea>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="responsiblePerson">Responsible Person</label>
+                        <input type="text" id="responsiblePerson" class="form-control" [value]="responsiblePersonName"
+                            readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="hostingInstitution">Hosting Institution</label>
+                        <input type="text" id="hostingInstitution" class="form-control" [value]="hostingInstitutionName"
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="budget">Budget</label>
+                        <input type="number" id="budget" class="form-control" [value]="project?.budget" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="postBudget">Post Budget</label>
+                        <input type="number" id="postBudget" class="form-control" [value]="project?.postBudget"
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="minDuration">Minimum Duration (semesters)</label>
+                        <input type="number" id="minDuration" class="form-control" [value]="project?.minDuration"
+                            readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="maxDuration">Maximum Duration (semesters)</label>
+                        <input type="number" id="maxDuration" class="form-control" [value]="project?.maxDuration"
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="taskType">Type of Task</label>
+                    <input type="text" id="taskType" class="form-control" [value]="taskTypeName" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="authorizedCountries">Authorized Countries</label>
+                    <input type="text" id="authorizedCountries" class="form-control"
+                        [value]="project?.authorizedCountries?.join(', ')" readonly>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" id="separateBudget"
+                        [checked]="project?.separateBudget" disabled>
+                    <label class="form-check-label" for="separateBudget">Separate Budget</label>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="publicationDate">Publication Date</label>
+                        <input type="text" id="publicationDate" class="form-control"
+                            [value]="project?.publicationDate | date" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="closingDate">Closing Date</label>
+                        <input type="text" id="closingDate" class="form-control" [value]="project?.closingDate | date"
+                            readonly>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="acceptedSubmissions">Accepted Submissions</label>
+                    <input type="number" id="acceptedSubmissions" class="form-control"
+                        [value]="project?.acceptedSubmissions" readonly>
+                </div>
+
+                <div class="mb-3">
+                    <label for="evaluationForm">Evaluation Form</label>
+                    <input type="text" id="evaluationForm" class="form-control" [value]="project?.evaluationForm?.name"
+                        readonly>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="documents">Document</label>
+                        <a [href]="getDocumentUrl()" class="btn btn-primary d-block" download>Download Document</a>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="photos">Photo</label>
+                        <img [src]="getPhotoUrl()" class="img-fluid rounded shadow-sm" alt="Project Photo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

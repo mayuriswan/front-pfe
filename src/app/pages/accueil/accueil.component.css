@@ -147,3 +147,54 @@
   
   .auth-button:hover {
     background-color: rgba(255, 255, 255, 0.1);}
+
+    .chatbot-container {
+      max-width: 500px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    
+    .chatbot-messages {
+      height: 300px;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+    }
+    
+    .message {
+      margin-bottom: 10px;
+      padding: 5px;
+      border-radius: 5px;
+    }
+    
+    .user-message {
+      background-color: #e1f5fe;
+      align-self: flex-end;
+    }
+    
+    .bot-message {
+      background-color: #f1f1f1;
+      align-self: flex-start;
+    }
+    
+    .chatbot-input {
+      display: flex;
+    }
+    
+    .chatbot-input input {
+      flex-grow: 1;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .chatbot-input button {
+      margin-left: 10px;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
