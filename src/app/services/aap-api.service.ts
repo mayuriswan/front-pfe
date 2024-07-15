@@ -114,6 +114,23 @@ export class AapApiService {
     console.log(evaluatorId);
     return this.http.get<any[]>(`${this.aapAPIUrl}/projects/evaluator/${evaluatorId}/projects`);
   }
+ 
+  getEvaluationForProject(projectId: number): Observable<any> {
+    return this.http.get<any>(`${this.aapAPIUrl}/Evaluations/criteria/${projectId}`);
+  }
+  
+  saveEvaluationNote(evaluationNote: any): Observable<any> {
+    return this.http.post<any>(`${this.aapAPIUrl}/Evaluations/evaluationNote`, evaluationNote);
+  }
+
+
+  getEvaluationCriteriaForProject(projectId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.aapAPIUrl}/Evaluations/project/${projectId}/criteria`);
+  }
+
+  updateSubmission(submission: any): Observable<any> {
+    return this.http.put<any>(`${this.aapAPIUrl}/Evaluations/submissions/${submission.id}`, submission);
+  }
 
   getSubmissionsForProject(projectId: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.aapAPIUrl}/Projects/${projectId}/submissions`);

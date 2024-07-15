@@ -29,9 +29,45 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <button class="btn btn-primary" (click)="evaluateSubmission(submission)">Evaluate</button>
+                            <p class="card-text d-flex align-items-center">
+                                <i *ngIf="isSubmissionEvaluatedByUser(submission)"
+                                    class="fas fa-check-circle text-success me-2"></i>
+                                <i *ngIf="!isSubmissionEvaluatedByUser(submission)"
+                                    class="fas fa-times-circle text-danger me-2"></i>
+                                <span>{{ isSubmissionEvaluatedByUser(submission) ? 'Evaluated' : 'Not Evaluated'
+                                    }}</span>
+                            </p>
+                            <p class="card-text">Global Note: {{ isSubmissionEvaluatedByUser(submission) ?
+                                submission.globalNote : 'Not given yet' }}</p>
+                            <button class="btn btn-primary" (click)="evaluateSubmission(submission)"
+                                [disabled]="isSubmissionEvaluatedByUser(submission)">Evaluate</button>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div *ngIf="selectedSubmission && evaluation" class="card mt-5">
+                <div class="card-header">
+                    <h5>Evaluate Submission</h5>
+                </div>
+                <div class="card-body">
+                    <h3>{{ selectedSubmission.user.firstname }} {{ selectedSubmission.user.lastname }}</h3>
+                    <div class="mb-3" *ngFor="let criterion of evaluationNote.criteriaNotes">
+                        <label for="{{criterion.criterionName}}">{{ criterion.criterionName }}</label>
+                        <input type="number" id="{{criterion.criterionName}}" class="form-control"
+                            [(ngModel)]="criterion.note" [max]="criterion.baseDeNotation">
+                        <input type="number" class="form-control mt-2" [value]="criterion.baseDeNotation" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="globalNote">Global Note</label>
+                        <input type="number" id="globalNote" class="form-control" [value]="calculateGlobalNote()"
+                            readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="comments">Comments</label>
+                        <textarea id="comments" class="form-control" rows="3"
+                            [(ngModel)]="evaluationNote.comments"></textarea>
+                    </div>
+                    <button class="btn btn-primary" (click)="saveEvaluation()">Save Evaluation</button>
                 </div>
             </div>
         </div>
