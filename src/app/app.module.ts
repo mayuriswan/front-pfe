@@ -75,6 +75,7 @@ import { LaboratoiresComponent } from './pages/laboratoires/laboratoires.compone
 import { EvaluationProjectComponentComponent } from './components/evaluation-project-component/evaluation-project-component.component';
 import { ProjectDetailsComponentComponent } from './components/project-details-component/project-details-component.component';
 import { EvaluatorHomeComponent } from './components/evaluator-home/evaluator-home.component';
+import { ResponsibleDashboardComponent } from './components/responsible-dashboard/responsible-dashboard.component';
 
 
 @NgModule({
@@ -123,7 +124,8 @@ import { EvaluatorHomeComponent } from './components/evaluator-home/evaluator-ho
     LaboratoiresComponent,
     EvaluationProjectComponentComponent,
     ProjectDetailsComponentComponent,
-    EvaluatorHomeComponent
+    EvaluatorHomeComponent,
+    ResponsibleDashboardComponent
     
     
     

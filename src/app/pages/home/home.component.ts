@@ -21,8 +21,12 @@ export class HomeComponent implements OnInit {
   }
 
   redirectUser(role: number): void {
-   if (role === 0) {
+    if (role === 0) {
       this.router.navigate(['/evaluator-home']);
-    } 
+    } else if (role === 3) {
+      this.router.navigate(['/responsible-home']);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

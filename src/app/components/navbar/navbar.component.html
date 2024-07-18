@@ -8,11 +8,15 @@
     <div class="dropdown">
       <a class="nav-link" href="#">Appel à projet en cours</a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" *ngFor="let project of enCoursProjects" href="/exemple-aap/{{ project.id }}">{{ project.name }}</a>
+        <a class="dropdown-item" *ngFor="let project of enCoursProjects" href="/exemple-aap/{{ project.id }}">{{
+          project.name }}</a>
       </div>
     </div>
   </nav>
   <div class="button-container">
-    <button *ngIf="!isLoginPage()" type="button" class="auth-button" (click)="navigateToLogin()">Se connecter</button>
+    <button *ngIf="!isLoginPage() && !isLoggedIn" type="button" class="auth-button" (click)="navigateToLogin()">Se
+      connecter</button>
+    <button *ngIf="isLoggedIn" type="button" class="auth-button" (click)="navigateToDashboard()">Go to
+      Dashboard</button>
   </div>
 </header>

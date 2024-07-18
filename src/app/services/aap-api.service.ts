@@ -114,6 +114,19 @@ export class AapApiService {
     console.log(evaluatorId);
     return this.http.get<any[]>(`${this.aapAPIUrl}/projects/evaluator/${evaluatorId}/projects`);
   }
+  getProjectsForResponsible(responsibleId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.aapAPIUrl}/projects/responsible/${responsibleId}`);
+  }
+  updateSubmissionStatus(submissionId: number, status: string): Observable<any> {
+    const url = `${this.aapAPIUrl}/Submissions/${submissionId}/${status}`;
+    console.log('url:', url);
+    return this.http.post<any>(url, {}).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error updating submission status:', error);
+        return throwError(error);
+      })
+    );
+  }
  
   getEvaluationForProject(projectId: number): Observable<any> {
     return this.http.get<any>(`${this.aapAPIUrl}/Evaluations/criteria/${projectId}`);

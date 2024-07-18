@@ -61,13 +61,12 @@ export class UserinfoComponent implements OnInit {
   getRoleText(role: number): string {
     switch (role) {
       case 0:
-        return 'Utilisateur normal';
+        return 'Evaluateur';
       case 1:
         return 'Administrateur';
-      case 2:
-        return 'Superieur';
+ 
       case 3:
-        return 'Evaluateur';
+        return 'Responsable';
       default:
         return 'Unknown';
     }

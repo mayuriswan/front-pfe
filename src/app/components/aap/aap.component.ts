@@ -13,6 +13,7 @@ export class AapComponent implements OnInit {
   users: any[] = [];
   selectedProject: any = null;
   searchTerm: string = '';
+  submissionsCache: { [key: number]: any[] } = {};
 
   constructor(private aapApiService: AapApiService, private router: Router) {}
 
@@ -29,6 +30,7 @@ export class AapComponent implements OnInit {
         this.projects = projects;
         this.users = users;
         this.mapResponsiblePersonToProject();
+        this.preloadSubmissions();
       },
       (error) => {
         console.error('Error fetching data:', error);
@@ -45,6 +47,19 @@ export class AapComponent implements OnInit {
     });
   }
 
+  preloadSubmissions() {
+    this.projects.forEach(project => {
+      this.aapApiService.getSubmissionsForProject(project.id).subscribe(
+        (submissions) => {
+          this.submissionsCache[project.id] = submissions;
+        },
+        (error) => {
+          console.error('Error fetching submissions:', error);
+        }
+      );
+    });
+  }
+
   get filteredProjects() {
     return this.projects.filter(project =>
       project.name.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -53,6 +68,11 @@ export class AapComponent implements OnInit {
 
   onProjectClick(project: any) {
     this.selectedProject = project;
+  }
+
+  getAcceptedSubmissionsCount(project: any): number {
+    const submissions = this.submissionsCache[project.id];
+    return submissions ? submissions.filter((submission: any) => submission.isAccepted === true).length : 0;
   }
 
   closeDetails() {

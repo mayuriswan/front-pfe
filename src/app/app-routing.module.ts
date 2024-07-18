@@ -16,6 +16,7 @@ import { EvaluationProjectComponentComponent } from './components/evaluation-pro
 import { AuthGuard } from './auth.guard';
 import { ProjectDetailsComponentComponent } from './components/project-details-component/project-details-component.component';
 import { EvaluatorHomeComponent } from './components/evaluator-home/evaluator-home.component';
+import { ResponsibleDashboardComponent } from './components/responsible-dashboard/responsible-dashboard.component';
 
 
 const routes: Routes = [
@@ -34,6 +35,8 @@ const routes: Routes = [
   { path: 'laboratoires', component:LaboratoiresComponent },
   { path: 'evaluation-form/:id/:projectId', component: EvaluationProjectComponentComponent, canActivate: [AuthGuard] },
   { path: 'project-details/:id', component: ProjectDetailsComponentComponent },
+  { path: 'responsible-home', component: ResponsibleDashboardComponent, canActivate: [AuthGuard] },
+
 
   { path: 'evaluator-home', component: EvaluatorHomeComponent , canActivate: [AuthGuard]},
 

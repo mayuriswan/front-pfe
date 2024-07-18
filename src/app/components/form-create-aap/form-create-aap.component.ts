@@ -170,13 +170,17 @@ export class FormCreateAapComponent implements OnInit {
 
   loadPeople(): void {
     this.apiService.getUserList().subscribe(users => {
-      this.allUsers = users.map(user => ({
+      const responsables = users.filter((user: any) => user.role === 3);
+      this.allUsers = responsables.map((user: any) => ({
         id: user.id,
         firstname: user.firstname,
         lastname: user.lastname
       }));
+    }, error => {
+      console.error('Error loading users', error);
     });
   }
+  
 
   loadEvaluators(): void {
     this.apiService.getUserList().subscribe(users => {

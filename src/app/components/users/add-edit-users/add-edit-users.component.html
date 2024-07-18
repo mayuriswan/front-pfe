@@ -12,8 +12,10 @@
     <div class="row mb-3">
         <div class="col-md-6">
             <label for="phone" class="form-label fw-bold">Num Telephone</label>
-            <input type="text" class="form-control form-control-lg" [(ngModel)]="phone" name="phone" pattern="^[0-9]+$" required>
-            <small class="text-danger" *ngIf="userForm.controls['phone']?.invalid && (userForm.controls['phone']?.dirty || userForm.controls['phone']?.touched)">
+            <input type="text" class="form-control form-control-lg" [(ngModel)]="phone" name="phone" pattern="^[0-9]+$"
+                required>
+            <small class="text-danger"
+                *ngIf="userForm.controls['phone']?.invalid && (userForm.controls['phone']?.dirty || userForm.controls['phone']?.touched)">
                 Please enter a valid phone number.
             </small>
         </div>
@@ -22,16 +24,18 @@
             <select class="form-select form-select-lg" [(ngModel)]="role" name="role" #roleSelect="ngModel" required>
                 <option value="">Select a role</option>
                 <option value="0">Evaluateur</option>
-                <option value="1">admin</option>
-                <option value="2">superieur</option>
-              </select>
+                <option value="1">Admin</option>
+                <option value="3">Responsible</option>
+            </select>
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-12">
             <label for="email" class="form-label fw-bold">Email</label>
-            <input type="email" class="form-control form-control-lg" [(ngModel)]="email" name="email" [disabled]="user['id'] > 0" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
-            <small class="text-danger" *ngIf="userForm.controls['email']?.invalid && (userForm.controls['email']?.dirty || userForm.controls['email']?.touched)">
+            <input type="email" class="form-control form-control-lg" [(ngModel)]="email" name="email"
+                [disabled]="user['id'] > 0" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+            <small class="text-danger"
+                *ngIf="userForm.controls['email']?.invalid && (userForm.controls['email']?.dirty || userForm.controls['email']?.touched)">
                 Please enter a valid email address.
             </small>
         </div>
@@ -39,8 +43,10 @@
     <div class="row mb-3">
         <div class="col-12">
             <label for="password" class="form-label fw-bold">Password</label>
-            <input type="password" class="form-control form-control-lg" [(ngModel)]="password" name="password" minlength="8">
-            <small class="text-danger" *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched) && password">
+            <input type="password" class="form-control form-control-lg" [(ngModel)]="password" name="password"
+                minlength="8">
+            <small class="text-danger"
+                *ngIf="userForm.controls['password']?.invalid && (userForm.controls['password']?.dirty || userForm.controls['password']?.touched) && password">
                 Password must be at least 8 characters long.
             </small>
         </div>
@@ -49,8 +55,9 @@
         <button (click)="addUser()" *ngIf="user['id']==0" class="btn btn-primary btn-lg" [disabled]="userForm.invalid">
             Ajouter
         </button>
-        <button (click)="updateUser()" *ngIf="user['id']!=0" class="btn btn-success btn-lg" [disabled]="userForm.invalid || (!firstname || !lastname || !phone || !email || roleSelect.invalid)">
+        <button (click)="updateUser()" *ngIf="user['id']!=0" class="btn btn-success btn-lg"
+            [disabled]="userForm.invalid || (!firstname || !lastname || !phone || !email || roleSelect.invalid)">
             Modifier
-          </button>
+        </button>
     </div>
 </form>

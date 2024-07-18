@@ -147,6 +147,8 @@ export class ShowUserComponent implements OnInit {
         return 'admin';
       case 2:
         return 'superieur';
+      case 3:
+        return 'responsable';
       default:
         return 'unknown';
     }

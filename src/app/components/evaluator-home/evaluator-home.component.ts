@@ -62,7 +62,7 @@ export class EvaluatorHomeComponent implements OnInit {
   loadSubmissions(projectId: number) {
     this.aapApiService.getSubmissionsForProject(projectId).subscribe(
       (submissions) => {
-        this.submissions = submissions;
+        this.submissions = submissions.filter(s=>s.userId === this.currentUser.id );
       },
       (error) => {
         console.error('Error fetching submissions:', error);

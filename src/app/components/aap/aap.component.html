@@ -38,7 +38,7 @@
         <div class="card" (click)="onProjectClick(project)" *ngIf="project.isPublic">
           <h4>{{ project.name }}</h4>
           <p>Responsable: {{ project.responsiblePerson?.firstname }} {{ project.responsiblePerson?.lastname }}</p>
-          <app-circular-progress-bar [progress]="project.nombreSubmissions"
+          <app-circular-progress-bar [progress]="getAcceptedSubmissionsCount(project)"
             [total]="project.acceptedSubmissions"></app-circular-progress-bar>
         </div>
       </ng-container>

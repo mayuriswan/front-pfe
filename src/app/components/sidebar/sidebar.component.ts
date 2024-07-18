@@ -13,12 +13,14 @@ export class SidebarComponent implements OnInit {
   isAdmin: boolean = false;
   isUserManager: boolean = false;
   isEvaluator = false;
+  isResponsible = false;  
 
 
   constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.user = this.authService.getCurrentUser();
+    console.log(this.user);
     this.checkUserRoles();
   }
 
@@ -26,6 +28,7 @@ export class SidebarComponent implements OnInit {
     if (this.user) {
       this.isAdmin = this.user.role === 1; // Assuming role 1 is admin
       this.isEvaluator = this.user?.role === 0;
+      this.isResponsible = this.user?.role === 3;
     }
   }
   navigateToHome() {
@@ -34,7 +37,10 @@ export class SidebarComponent implements OnInit {
     } else if (this.isEvaluator) {
       this.router.navigate(['/evaluator-home']);
       console.log('evaluator');
-    } else {
+    }else if(this.isResponsible){
+      this.router.navigate(['/responsible-home']);
+    } 
+    else {
       this.router.navigate(['/home']);
     }
   }
